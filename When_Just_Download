@@ -2,9 +2,11 @@
 
 1. need to make new vertualenv
  - python -m venv myvenv
+ - (in linux) virtualenv --python=python3.4 myvenv
 
 2. setup Django in the virtual environment myvenv
  - pig install django==1.8
+ - (in linux) pip install django whitenoise
 
 3. database migration
  - python manage.py migrate
