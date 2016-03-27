@@ -21,15 +21,6 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/blog/templates/blog" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/gis/templates/gis" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/gis/templates/gis/admin" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/gis/templates/gis/google" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/admin/templates/admin" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/admin/templates/admin/auth/user" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/admin/templates/admin/includes" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/admin/templates/admin/edit_inline" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/admin/templates/registration" />
-        <option value="$MODULE_DIR$/myvenv/Lib/site-packages/django/contrib/admindocs/templates/admin_doc" />
       </list>
     </option>
   </component>

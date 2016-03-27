@@ -1,10 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
+from django.contrib.auth.models import User
 from blog.models import Post, Comment
 from blog.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets, permissions
+from blog.serializers import UserSerializer, PostSerializer, CommentSerializer
+from blog.permissions import IsOwnerOrReadOnly
+
 
 # Create your views here.
+from rest_framework.authentication import SessionAuthentication
+
 
 def post_list(request):
     posts = Post.objects.all()
@@ -66,7 +72,7 @@ def post_remove(request, pk):
 
 
 ### for Comment part
-
+@login_required
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -74,6 +80,7 @@ def add_comment_to_post(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
+            comment.author = request.user
             comment.save()
         return redirect('blog.views.post_detail', pk=post.pk)
     else:
@@ -92,3 +99,21 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('blog.views.post_detail', pk=post_pk)
+
+
+
+### for rest framework api  ###
+
+# APIs for reading and a set of Users
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class PostViewSet(viewsets.ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+
+class CommentViewSet(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
