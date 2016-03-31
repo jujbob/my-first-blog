@@ -4,9 +4,9 @@ from rest_framework import routers
 from blog import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'posts', views.PostViewSet)
-router.register(r'comments', views.CommentViewSet)
+router.register(r'api/users', views.UserViewSet)
+router.register(r'api/posts', views.PostViewSet)
+router.register(r'api/comments', views.CommentViewSet)
 admin.autodiscover()
 
 urlpatterns = patterns('',

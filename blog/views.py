@@ -1,3 +1,5 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from blog.models import Post, Comment
@@ -13,8 +15,21 @@ from rest_framework.authentication import SessionAuthentication
 
 
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'blog/post_list.html', {'posts': posts})
+
+    page_data = Paginator(Post.objects.all(), 5)
+    page = request.GET.get('page')
+
+    if page is None:
+        page = 1
+
+    try:
+        posts = page_data.page(page)
+    except PageNotAnInteger:
+        posts = page_data.page(1)
+    except EmptyPage:
+        posts = page_data.page(page_data.num_pages)
+
+    return render(request, 'blog/post_list.html', {'posts': posts, 'current_page': page, 'total_page': range(1, page_data.num_pages + 1)})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -34,9 +49,25 @@ def post_new(request):
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
 
+
+def errors(request):
+#    if request.GET.error_code == 1:
+
+    return render(request, 'blog/errors/permission.html')
+       # return HttpResponse("you don't have permission to edit")
+
+
+
 @login_required
 def post_edit(request, pk):
+
+    # To check that the post is existing or not
     post = get_object_or_404(Post, pk=pk)
+
+    # To check about user
+    if request.user != post.author:
+        return redirect('blog.views.errors')
+
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -63,6 +94,11 @@ def post_publish(request, pk):
 @login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
+    # To check about user
+    if request.user != post.author:
+        return redirect('blog.views.errors')
+
     if post:
         post.delete()
     else:

@@ -45,3 +45,6 @@ source env/bin/activate
 pip install django
 pip install djangorestframework
 pip install pygments  # 코드 하일라이팅에 사용할 패키지입니다
+
+
+http
