@@ -1,9 +1,10 @@
+from django.contrib import auth
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from blog.models import Post, Comment
-from blog.forms import PostForm, CommentForm
+from blog.forms import PostForm, CommentForm, SubCommentForm
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets, permissions
 from blog.serializers import UserSerializer, PostSerializer, CommentSerializer
@@ -136,6 +137,22 @@ def comment_remove(request, pk):
     comment.delete()
     return redirect('blog.views.post_detail', pk=post_pk)
 
+@login_required
+def add_subComment_to_post(request, post_pk, comment_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.method == "POST":
+        form = SubCommentForm(request.POST)
+        if form.is_valid():
+            subComment = form.save(commit=False)
+            subComment.post = post
+            subComment.comment = comment
+            subComment.author = request.user
+            subComment.save()
+        return redirect('blog.views.post_detail', pk=post_pk)
+    else:
+        form = SubCommentForm()
+        return render(request, 'blog/add_subComment_to_post.html', {'form': form})
 
 
 ### for rest framework api  ###

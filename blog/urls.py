@@ -16,5 +16,6 @@ urlpatterns = [
 #    url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     url(r'^errors/$', views.errors, name='errors'),
+    url(r'^post/(?P<post_pk>\d+)/comment/(?P<comment_pk>\d+)/subComment/$', views.add_subComment_to_post, name='add_subComment_to_post'),
 
 ]

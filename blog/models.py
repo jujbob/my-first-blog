@@ -29,3 +29,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+class SubComment(models.Model):
+    post = models.ForeignKey('blog.Post', related_name='subComments')
+    comment = models.ForeignKey('blog.Comment', related_name='subComments')
+    author = models.ForeignKey('auth.User')
+    text = models.TextField()
+    created_date= models.DateTimeField(default=timezone.now)
+
+    def approve(self):
+        self.save()

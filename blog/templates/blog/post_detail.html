@@ -28,6 +28,19 @@
                 </div>
                 <strong>{{ comment.author }}</strong>
                 <p>{{ comment.text|linebreaks }}</p>
+                {% for subComment in comment.subComments.all %} <!-- start point about subComments -->
+                    <div class="comment">
+                        <div class="date">
+                            {{ subComment.created_date }}
+                            {% if subComment.author == request.user %}
+                                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            {% endif %}
+                        </div>
+                        <strong>{{ subComment.author }}</strong>
+                        <p>{{ subComment.text|linebreaks }}</p>
+                    </div>
+                {% endfor %}
+                <a href="{% url 'add_subComment_to_post' post_pk=post.pk comment_pk=comment.pk %}"><p>Add comment</p></a>
             </div>
         {% empty %}
             <p>No comments here yet :(</p>
