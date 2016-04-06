@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'api/users', views.UserViewSet)
 router.register(r'api/posts', views.PostViewSet)
 router.register(r'api/comments', views.CommentViewSet)
+router.register(r'api/subComments', views.SubCommentViewSet)
 admin.autodiscover()
 
 urlpatterns = patterns('',

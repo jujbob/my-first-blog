@@ -1,18 +1,12 @@
-from django.contrib import auth
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
-from blog.models import Post, Comment
+from blog.models import Post, Comment, SubComment
 from blog.forms import PostForm, CommentForm, SubCommentForm
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets, permissions
-from blog.serializers import UserSerializer, PostSerializer, CommentSerializer
+from blog.serializers import UserSerializer, PostSerializer, CommentSerializer, SubCommentSerializer
 from blog.permissions import IsOwnerOrReadOnly
-
-
-# Create your views here.
-from rest_framework.authentication import SessionAuthentication
 
 
 def post_list(request):
@@ -170,3 +164,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
+
+class SubCommentViewSet(viewsets.ModelViewSet):
+    serializer_class = SubCommentSerializer
+    queryset = SubComment.objects.all()
