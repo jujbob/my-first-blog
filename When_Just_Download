@@ -8,6 +8,7 @@
  - pig install django==1.8
  - (in linux) pip install django whitenoise
  - (in linux) pip install djangorestframework
+ - (in linux) pip install pygments  # 코드 하일라이팅에 사용할 패키지입니다
 
 3. database migration
  - python manage.py migrate
@@ -25,8 +26,7 @@ $ git commit -m "Added view and template for detailed blog post as well as CSS f
 $ git push
 
 
-
- when you want to add new model
+when you want to add new model
  1. python manage.py startapp blog
  2. go into blog/models.py --> make new model
  3. generation new database model from models.py
@@ -37,12 +37,19 @@ $ git push
   - admin.site.register(Post)
 
 
-
 [for rest_framework]
 
 virtualenv --python=python3.4 env
 source env/bin/activate
 
-pip install django
-pip install djangorestframework
-pip install pygments  # 코드 하일라이팅에 사용할 패키지입니다
+
+when you want to add new model
+ 1. python manage.py startapp authentication
+ 2. go into blog/models.py --> make new model
+ 3. generation new database model from models.py
+  - python manage.py makemigrations blog
+  - python manage.py migrate blog
+ 4. adding to admin (blog/admin.py file)
+  - from .models import Post
+  - admin.site.register(Post)
+

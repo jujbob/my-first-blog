@@ -1,11 +1,10 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.models import User
 from blog.models import Post, Comment, SubComment
 from blog.forms import PostForm, CommentForm, SubCommentForm
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets, permissions
-from blog.serializers import UserSerializer, PostSerializer, CommentSerializer, SubCommentSerializer
+from blog.serializers import PostSerializer, CommentSerializer, SubCommentSerializer
 from blog.permissions import IsOwnerOrReadOnly
 
 
@@ -152,9 +151,9 @@ def add_subComment_to_post(request, post_pk, comment_pk):
 ### for rest framework api  ###
 
 # APIs for reading and a set of Users
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+#class UserViewSet(viewsets.ModelViewSet):
+#    queryset = User.objects.all()
+#    serializer_class = UserSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
