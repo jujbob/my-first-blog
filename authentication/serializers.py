@@ -14,7 +14,7 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'username', 'created_at', 'updated_at',
                   'first_name', 'last_name', 'tagline', 'password', 'address',
                   'confirm_password',)
-        read_only_fields = ('created_at', 'updated_at',)
+        read_only_fields = ('email', 'created_at', 'updated_at',)
 
         def create(self, validated_data):
             return Account.objects.create(**validated_data)
@@ -25,11 +25,11 @@ class AccountSerializer(serializers.ModelSerializer):
 
             instance.save()
 
-            passwrod = validated_data.get('password', None)
+            password = validated_data.get('password', None)
             confirm_password = validated_data.get('confirm_password', None)
 
-            if passwrod and confirm_password and passwrod == confirm_password:
-                instance.set_password(passwrod)
+            if password and confirm_password and password == confirm_password:
+                instance.set_password(password)
                 instance.save()
 
             update_session_auth_hash(self.context.get('request'), instance)

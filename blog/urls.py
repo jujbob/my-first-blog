@@ -1,10 +1,19 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
 from rest_framework import routers
 
-router = routers.DefaultRouter()
+## for rest API ##
+router = routers.SimpleRouter()
+router.register(r'posts', views.PostViewSet, base_name='post')
+router.register(r'comments', views.CommentViewSet, base_name='comment')
+router.register(r'subComments', views.SubCommentViewSet, base_name='subComment')
 
 urlpatterns = [
+
+    ## for rest API ##
+    url(r'^api/', include(router.urls)),
+
+    ## for web pages ##
     url(r'^$', views.post_list, name='post_list'),
     url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),

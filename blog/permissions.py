@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from django.contrib.auth.models import User
+from authentication.models import Account
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
@@ -14,7 +14,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         #adminUser = User.objects.filter(username='jujbob')
-        adminUser = User.objects.filter(is_staff=True)
+        adminUser = Account.objects.filter(is_staff=True)
         if request.user in adminUser:
             return True
 
