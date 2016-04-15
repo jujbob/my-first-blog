@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url, include, patterns
 from . import views
 from rest_framework import routers
 
@@ -8,9 +8,10 @@ router.register(r'posts', views.PostViewSet, base_name='post')
 router.register(r'comments', views.CommentViewSet, base_name='comment')
 router.register(r'subComments', views.SubCommentViewSet, base_name='subComment')
 
-urlpatterns = [
+urlpatterns = patterns(
 
     ## for rest API ##
+    '',
     url(r'^api/', include(router.urls)),
 
     ## for web pages ##
@@ -22,9 +23,8 @@ urlpatterns = [
     url(r'^post/(?P<pk>[0-9]+)/publish/$', views.post_publish, name='post_publish'),
     url(r'^post/(?P<pk>[0-9]+)/remove/$', views.post_remove, name='post_remove'),
     url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
-#    url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     url(r'^errors/$', views.errors, name='errors'),
-    url(r'^post/(?P<post_pk>\d+)/comment/(?P<comment_pk>\d+)/subComment/$', views.add_subComment_to_post, name='add_subComment_to_post'),
+    url(r'^post/(?P<post_pk>\d+)/comment/(?P<comment_pk>\d+)/subComment/$', views.add_subComment_to_post, name='add_subComment_to_post')
 
-]
+)

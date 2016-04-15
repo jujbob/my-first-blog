@@ -14,7 +14,7 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users have to have a name')
 
         account = self.model(
-            email = self.normalize_email(email), username = kwargs.get('username')
+            email = self.normalize_email(email), is_superuser=False, username = kwargs.get('username')
         )
 
         account.set_password(password)
@@ -25,6 +25,7 @@ class AccountManager(BaseUserManager):
     def create_superuser(self, email, password=None, **kwargs):
         account = self.create_user(email, password, **kwargs)
 
+        account.is_superuser = True
         account.is_admin = True
         account.is_staff = True
         account.save()
@@ -32,7 +33,8 @@ class AccountManager(BaseUserManager):
         return account
 
 
-class Account(AbstractBaseUser):
+
+class Account(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=80, unique=True)

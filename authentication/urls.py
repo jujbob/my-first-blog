@@ -1,13 +1,13 @@
 from authentication.views import AccountViewSet
-from django.conf.urls import url, include
+from django.conf.urls import url, include, patterns
 from rest_framework import routers
 
-router = routers.DefaultRouter()
-router.register(r'accounts', AccountViewSet, base_name='account')
+router = routers.SimpleRouter()
+router.register(r'accounts', AccountViewSet)
 
-urlpatterns = [
-
+urlpatterns = patterns(
+    '',
     url(r'^api/', include(router.urls))
 
 
-]
+)

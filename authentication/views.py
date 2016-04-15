@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 
 class AccountViewSet(viewsets.ModelViewSet):
-    lookup_field = 'username'
+#    lookup_field = 'username'
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 

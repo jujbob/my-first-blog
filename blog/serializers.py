@@ -9,20 +9,20 @@ from rest_framework import serializers
 #        fields = ('url', 'username', 'email')
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Post
         fields = ('url', 'author', 'title', 'text', 'created_date', 'published_date', 'comments')
         read_only_fields = ('author', 'comments')
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         fields = ('url', 'post', 'author', 'text', 'created_date', 'approved_comment')
         read_only_fields = ('author',)
 
-class SubCommentSerializer(serializers.ModelSerializer):
+class SubCommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SubComment
         fields = ('url', 'post', 'comment', 'author', 'text', 'created_date')
