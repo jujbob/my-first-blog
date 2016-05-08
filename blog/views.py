@@ -10,7 +10,7 @@ from blog.permissions import IsOwnerOrReadOnly
 
 def post_list(request):
 
-    page_data = Paginator(Post.objects.all(), 5)
+    page_data = Paginator(Post.objects.all(), 10)
     page = request.GET.get('page')
 
     if page is None:
@@ -146,6 +146,14 @@ def add_subComment_to_post(request, post_pk, comment_pk):
     else:
         form = SubCommentForm()
         return render(request, 'blog/add_subComment_to_post.html', {'form': form})
+
+@login_required
+def subComment_remove(request, pk):
+    subComment = get_object_or_404(SubComment, pk=pk)
+    post_pk = subComment.post.pk
+    subComment.delete()
+    return redirect('blog.views.post_detail', pk=post_pk)
+
 
 
 ### for rest framework api  ###

@@ -15,6 +15,7 @@ urlpatterns = patterns(
     url(r'^api/', include(router.urls)),
 
     ## for web pages ##
+
     url(r'^$', views.post_list, name='post_list'),
     url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
@@ -25,6 +26,7 @@ urlpatterns = patterns(
     url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     url(r'^errors/$', views.errors, name='errors'),
-    url(r'^post/(?P<post_pk>\d+)/comment/(?P<comment_pk>\d+)/subComment/$', views.add_subComment_to_post, name='add_subComment_to_post')
+    url(r'^post/(?P<post_pk>\d+)/comment/(?P<comment_pk>\d+)/subComment/$', views.add_subComment_to_post, name='add_subComment_to_post'),
+    url(r'^subComment/(?P<pk>\d+)/remove/$', views.subComment_remove, name='subComment_remove')
 
 )

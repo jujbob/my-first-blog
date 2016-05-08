@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% load staticfiles %}
+    <!-- Page Contents -->
+    <div class="page animated fadeinright">
+
+        {% for post in posts %}
+
+            <div class="card m-20">
+                <div class="header-hover">
+                    <img class="avatar" src="{% static 'img/user5.jpg' %}" alt="">
+                    <div class="details">
+                        <span>{{ post.author }}</span>
+                        <span class="small">{{ post.published_date }}</span>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="{% static 'img/7.jpg' %}" alt="">
+                    <div class="opacity-overlay-top"></div>
+                </div>
+                <div class="p-20 grey lighten-4">
+                    <h4>{{ post.title }}</h4>
+                    <p>{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }})   </p>
+                    <a href="{% url 'post_detail' pk=post.pk %}" class="waves-effect waves-light btn-flat primary-text">
+                        <i class="ion-ios-arrow-thin-right right"></i>
+                        Read
+                    </a>
+                </div>
+            </div>
+
+    {% endfor %}
+
+    <!-- pagenation -->
+    <span> page: {{ current_page }}</span>
+    {% for page in total_page %}
+        {% if current_page != page %}
+            <span class="atv"><a href="?page={{ page }}">{{ page }} </a></span>
+        {% else %}
+            <span class="atv"> <b>{{ page }}</b> </span>
+        {% endif %}
+    {% endfor %}
+
+    </div>
+{% endblock content %}
