@@ -191,10 +191,26 @@
 
     <!-- Toolbar -->
     <div id="toolbar" class="primary-color">
-        <div class="title"><a href={% url 'post_list' %}>BuddyLang</a></div>
-        <div class="open-right" id="open-right" data-activates="slide-out">
-            <i class="ion-android-menu"></i>
+
+        <div>
+            <div class="title"><a href={% url 'post_list' %}>BuddyLang</a></div>
         </div>
+        <div style="float: right">
+            {% if user.is_authenticated %}
+                <a href="{% url 'post_new' %}" class="title">New Post</a>
+                <p class="title">{{ user.username }}<small>(<a href="{% url 'logout_user' %}">Log out</a>)</small></p>
+            {% else %}
+                <a class="title" href={% url "login_view" %}>login</a>
+ <!--               <a href="/" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> -->
+            {% endif %}
+
+            <!--            <div class="title"> <a href={% url "login_view" %}>login</a></div>
+            <div class="title"> <a href={% url "login_view" %}>login</a></div> -->
+            <div class="open-right" id="open-right" data-activates="slide-out">
+                <i class="ion-android-menu"></i>
+            </div>
+        </div>
+
     </div>
     <!-- End of Toolbar -->
     <!-- Start Content -->

@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from blog.models import Post, Comment, SubComment
 from rest_framework import serializers
 

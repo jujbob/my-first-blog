@@ -103,14 +103,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/WebApps/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'WebApps/static')
+STATIC_ROOT = os.path.join(BASE_DIR)
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "WebApps/static"),
 )
 
 
-LOGIN_REDIRECT = '/'
+LOGIN_REDIRECT = '/auth/login_view/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
