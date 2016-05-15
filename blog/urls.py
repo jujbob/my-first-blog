@@ -1,4 +1,6 @@
 from django.conf.urls import url, include, patterns
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 from rest_framework import routers
 
@@ -28,6 +30,14 @@ urlpatterns = patterns(
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     url(r'^errors/$', views.errors, name='errors'),
     url(r'^post/(?P<post_pk>\d+)/comment/(?P<comment_pk>\d+)/subComment/$', views.add_subComment_to_post, name='add_subComment_to_post'),
-    url(r'^subComment/(?P<pk>\d+)/remove/$', views.subComment_remove, name='subComment_remove')
+    url(r'^subComment/(?P<pk>\d+)/remove/$', views.subComment_remove, name='subComment_remove'),
+
+    # for resources based on post #
+    url(r'^media/image/(?P<pk>\d+)$', views.image_detail, name='image_detail'),
+    url(r'^media/image/new/$', views.image_new, name='image_new'),
+    url(r'^media/image/edit/$', views.image_edit, name='image_edit')
 
 )
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,10 @@
+
+# coding: utf-8
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from blog.models import Post, Comment, SubComment
-from blog.forms import PostForm, CommentForm, SubCommentForm
+from blog.models import Post, Comment, SubComment, Resource
+from blog.forms import PostForm, CommentForm, SubCommentForm, ResourceForm
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets, permissions
 from blog.serializers import PostSerializer, CommentSerializer, SubCommentSerializer
@@ -153,6 +156,32 @@ def subComment_remove(request, pk):
     post_pk = subComment.post.pk
     subComment.delete()
     return redirect('blog.views.post_detail', pk=post_pk)
+
+
+
+
+def image_detail(request, pk):
+    image = get_object_or_404(Resource, pk=pk)
+    message = '<p>포스트번호:{0}, img:{1}</p> <img src={1}></img>'.format(image.post_id, image.image_file.url)
+    return HttpResponse(message)
+
+def image_new(request):
+
+    if request.method == 'GET':
+        form = ResourceForm()
+    elif request.method == 'POST':
+        form = ResourceForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_photo = form.save()
+            return redirect(new_photo.get_absolute_url())
+
+    return render(request, 'image_new.html', {form: form})
+
+
+def image_edit(request, pk):
+    return HttpResponse("notting")
+
+
 
 
 
