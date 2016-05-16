@@ -4,27 +4,49 @@
     <div class="page fullscreen valign-wrapper animated fadeinright">
 
         <div class="valign center-align w-100">
-            <form name="LoginForm" action="/auth/login_user/" method="post">
+            <form name="LoginForm" action="{% url 'base_login' %}" method="post">
                 {% csrf_token %}
                 <h1 class="m-0"><strong>BuddyLang</strong></h1>
-                <h5>Sharing daily studies with your friends in English</h5>
-                <div class="p-20">
-                    <div class="input-field center">
-                        <input class="validate" name="email" id="email" type="text">
-                        <label for="login">Username</label>
-                    </div>
 
-                    <div class="input-field center">
-                        <input class="validate" name="password" id="password" type="password">
-                        <label for="login-psw">Password</label>
-                    </div>
-                </div>
-                <button type="submit" class="waves-effect waves-light btn-large primary-color block m-20 animated bouncein delay-4">Login</button>
-            </form>
+                {% if form.errors %}
+                    <h5>ID나 비밀번호가 일치하지 않습니다.</h5>
+                {% endif %}
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <h5>권한이 없는 페이지에 접근하였으니, 권한이 있는 계정으로 로그인하세요.</h5>
+                    {% else %}
+                        <h5>이 페이지를 보려면 로그인을 해야 합니다.</h5>
+                    {% endif %}
+                {% endif %}
 
-            <a class="waves-effect waves-light btn-large light-blue darken-4 block m-20 animated bouncein delay-5" href="index.html"><i class="ion-social-facebook left"></i> Login with Facebook</a>
-            <span class="block">Don't have an account? <a class="primary-text" href="signup.html">Sign Up</a></span>
-            <span class="block">Forgot your password? <a class="primary-text" href="forgot.html">Get it Back!</a></span>
+                {% if user.is_authenticated %}
+                    <h5> Hello <b>{{ user.username }}</b></h5>
+                    <span class="block">Let's check your profile <a class="primary-text" href={% url 'sign_up' %}><b>Profile</b></a></span>
+                    <span class="block">logout? <a class="primary-text" href="{% url 'logout_user' %}"><b>logout</b></a></span>
+                {% else %}
+                    <h5>Sharing daily studies with your friends in English</h5>
+                    <div class="p-20">
+                        <div class="input-field center">
+           <!--                 <input class="validate" name="email" id="email" type="text">  -->
+                            <label for="login">Email</label>
+                            {{ form.username }}
+                        </div>
+
+                        <div class="input-field center">
+           <!--                 <input class="validate" name="password" id="password" type="password">  -->
+                            <label for="login-psw">Password</label>
+                            {{ form.password }}
+                        </div>
+
+                    </div>
+                    <button type="submit" class="waves-effect waves-light btn-large primary-color block m-20 animated bouncein delay-4">Login</button>
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </form>
+
+                <a class="waves-effect waves-light btn-large light-blue darken-4 block m-20 animated bouncein delay-5" href="index.html"><i class="ion-social-facebook left"></i> Login with Facebook</a>
+                <span class="block">Do you have an account? <a class="primary-text" href={% url 'base_login' %}>Login</a></span>
+                <span class="block">Forgot your password? <a class="primary-text" href="forgot.html">Get it Back!</a></span>
+            {% endif %}
         </div>
 
     </div>

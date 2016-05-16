@@ -115,6 +115,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'WebApps/media')
 
 
 LOGIN_REDIRECT = '/auth/login_view/'
+LOGIN_REDIRECT_URL = '/post/list/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),

@@ -200,7 +200,7 @@
                 <a href="{% url 'post_new' %}" class="title">New Post</a>
                 <p class="title">{{ user.username }}<small>(<a href="{% url 'logout_user' %}">Log out</a>)</small></p>
             {% else %}
-                <a class="title" href={% url "login_view" %}>login</a>
+                <a class="title" href={% url "base_login" %}>login</a>
  <!--               <a href="/" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> -->
             {% endif %}
 
@@ -221,7 +221,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <p class="center-align grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    <p class="center-align grey-text text-lighten-4">Sharing your daily life in English</p>
                     <div class="center-align">
                         <i class="ion-social-facebook m-10 white-text"></i>
                         <i class="ion-social-twitter m-10 white-text"></i>

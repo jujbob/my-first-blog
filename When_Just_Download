@@ -8,8 +8,9 @@
  - pig install django==1.8
  - (in linux) pip install django whitenoise
  - (in linux) pip install djangorestframework
- - (in linux) pip install pygments  # 코드 하일라이팅에 사용할 패키지입니다
+ - (in linux) pip install pygments  # code highlight tool
  - (in linux) pip install pillow  # for modeling ImageFiled (needed --> ape-get install libjpeg-dev python3-dev)
+ - (if you have troubles) sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
 
 
 3. database migration

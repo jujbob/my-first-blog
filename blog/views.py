@@ -18,6 +18,8 @@ def post_list(request):
 
     if page is None:
         page = 1
+    else:
+        page = int(page)
 
     try:
         posts = page_data.page(page)
@@ -175,7 +177,7 @@ def image_new(request):
             new_photo = form.save()
             return redirect(new_photo.get_absolute_url())
 
-    return render(request, 'image_new.html', {form: form})
+    return render(request, 'blog/image_new.html', {form: form})
 
 
 def image_edit(request, pk):

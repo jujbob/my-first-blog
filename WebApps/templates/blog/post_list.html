@@ -28,18 +28,18 @@
                     </a>
                 </div>
             </div>
-
     {% endfor %}
 
-    <!-- pagenation -->
-    <span> page: {{ current_page }}</span>
-    {% for page in total_page %}
-        {% if current_page != page %}
-            <span class="atv"><a href="?page={{ page }}">{{ page }} </a></span>
-        {% else %}
-            <span class="atv"> <b>{{ page }}</b> </span>
-        {% endif %}
-    {% endfor %}
+    <!-- pagination -->
+    <div class="valign center-align w-100">
+        {% for page in total_page %}
+            {% if current_page != page %}
+                <span><a href="?page={{ page }}">{{ page }} </a></span>
+            {% else %}
+               <span><b>{{ page }}</b></span>
+            {% endif %}
+        {% endfor %}
+    </div>
 
     </div>
 {% endblock content %}

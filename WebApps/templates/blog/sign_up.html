@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <!-- Page Contents -->
+    <div class="page fullscreen valign-wrapper animated fadeinright">
+
+        <div class="valign center-align w-100">
+            <h1 class="m-0"><strong>BuddyLang</strong></h1>
+            <h5>Register your brand new Account</h5>
+
+            <div class="p-20">
+                <div class="input-field center">
+                    <label for="login">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="input-field center">
+                    <label for="login-psw">Username</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="input-field center">
+                    <label for="login-psw">Password</label>
+                    {{ form.password }}
+                </div>
+                <div class="input-field center">
+                    <input class="validate" id="login-psw2" type="password">
+                    <label for="login-psw2">Confirm</label>
+                </div>
+
+            </div>
+
+            <a class="waves-effect waves-light btn-large primary-color block m-20 animated bouncein delay-4" href="index.html">Register</a>
+            <a class="waves-effect waves-light btn-large light-blue darken-4 block m-20 animated bouncein delay-5" href="index.html"><i class="ion-social-facebook left"></i> Sign with Facebook</a>
+            <span class="block">have an account? <a class="primary-text" href={% url 'base_login' %}><b>log In</b></a></span>
+            <span class="block">Forgot your password? <a class="primary-text" href="forgot.html"><b>Get it Back!</b></a></span>
+        </div>
+
+    </div>
+    <!-- End of Page Contents -->
+    </div><!-- End of Main Container -->
+
+{% endblock %}

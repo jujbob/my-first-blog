@@ -1,3 +1,5 @@
+from authentication.forms import AccountForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from rest_framework import permissions, viewsets, status
 
@@ -11,7 +13,6 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 
 
 def login_view(request):
-
     return render(request, 'blog/login_view.html')
 
 def logout_user(request):
@@ -47,7 +48,18 @@ def login_user(request):
 
     return redirect('blog.views.post_list')
 
+def sign_up(request):
 
+    if request.method =='POST':
+        form = AccountForm()
+        return HttpResponse("here is a test")
+    else:
+        form = AccountForm()
+        return render(request, 'blog/sign_up.html', {'form': form})
+
+
+
+#for restframework
 class AccountViewSet(viewsets.ModelViewSet):
 #    lookup_field = 'username'
     queryset = Account.objects.all()
