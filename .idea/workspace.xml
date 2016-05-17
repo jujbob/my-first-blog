@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0071cb29-6d90-497c-af33-85ddeabbf03b" name="Default" comment="Adding Authentication">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WebApps/templates/blog/sign_up_ok.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebApps/templates/blog/login_view.html" afterPath="$PROJECT_DIR$/WebApps/templates/blog/login_view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebApps/templates/blog/sign_up.html" afterPath="$PROJECT_DIR$/WebApps/templates/blog/sign_up.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/When_Just_Download" afterPath="$PROJECT_DIR$/When_Just_Download" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/forms.py" afterPath="$PROJECT_DIR$/authentication/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/models.py" afterPath="$PROJECT_DIR$/authentication/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/urls.py" afterPath="$PROJECT_DIR$/authentication/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/views.py" afterPath="$PROJECT_DIR$/authentication/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebApps/static/css/style.css" afterPath="$PROJECT_DIR$/WebApps/static/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebApps/templates/blog/html/blog.html" afterPath="$PROJECT_DIR$/WebApps/templates/blog/html/blog.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebApps/templates/blog/post_detail.html" afterPath="$PROJECT_DIR$/WebApps/templates/blog/post_detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebApps/templates/blog/post_list.html" afterPath="$PROJECT_DIR$/WebApps/templates/blog/post_list.html" />
     </list>
     <ignored path="djangogirls.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,7 +57,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sign_up.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sign_up.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/sign_up.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="702">
@@ -108,8 +104,38 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authentication/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="52" column="59" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
+            <state relative-caret-position="418">
+              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blog.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/html/blog.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-10">
+              <caret line="194" column="14" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/post_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post_detail.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/post_detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -137,7 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/myvenv/Scripts/mysite/settings.py" />
         <option value="$PROJECT_DIR$/myvenv/Scripts/blog/models.py" />
         <option value="$PROJECT_DIR$/myvenv/Scripts/blog/admin.py" />
         <option value="$PROJECT_DIR$/blog/templates/blog/post_eidt.html" />
@@ -157,7 +182,6 @@
         <option value="$PROJECT_DIR$/mysite/urls.py" />
         <option value="$PROJECT_DIR$/authentication/serializers.py" />
         <option value="$PROJECT_DIR$/WebApps/static/css/blog.css" />
-        <option value="$PROJECT_DIR$/WebApps/templates/blog/html/blog.html" />
         <option value="$USER_HOME$/Downloads/Jetpack - Mobile Template &amp; Tablet/app/jetpack_html/index.html" />
         <option value="$PROJECT_DIR$/WebApps/templates/blog/html/index-drawer.html" />
         <option value="$PROJECT_DIR$/WebApps/templates/blog/html/index.html" />
@@ -165,7 +189,6 @@
         <option value="$PROJECT_DIR$/WebApps/templates/blog/html/article.html" />
         <option value="$PROJECT_DIR$/blog/permissions.py" />
         <option value="$PROJECT_DIR$/WebApps/templates/blog/html/login.html" />
-        <option value="$PROJECT_DIR$/WebApps/templates/blog/post_detail.html" />
         <option value="$PROJECT_DIR$/blog/serializers.py" />
         <option value="$PROJECT_DIR$/blog/admin.py" />
         <option value="$PROJECT_DIR$/authentication/admin.py" />
@@ -177,7 +200,6 @@
         <option value="$PROJECT_DIR$/mysite/settings.py" />
         <option value="$PROJECT_DIR$/WebApps/templates/blog/base.html" />
         <option value="$PROJECT_DIR$/blog/views.py" />
-        <option value="$PROJECT_DIR$/WebApps/templates/blog/post_list.html" />
         <option value="$PROJECT_DIR$/WebApps/templates/blog/html/signup.html" />
         <option value="$PROJECT_DIR$/blog/models.py" />
         <option value="$PROJECT_DIR$/When_Just_Download" />
@@ -188,6 +210,10 @@
         <option value="$PROJECT_DIR$/authentication/forms.py" />
         <option value="$PROJECT_DIR$/authentication/models.py" />
         <option value="$PROJECT_DIR$/WebApps/templates/blog/sign_up.html" />
+        <option value="$PROJECT_DIR$/WebApps/templates/blog/html/blog.html" />
+        <option value="$PROJECT_DIR$/WebApps/static/css/style.css" />
+        <option value="$PROJECT_DIR$/WebApps/templates/blog/post_list.html" />
+        <option value="$PROJECT_DIR$/WebApps/templates/blog/post_detail.html" />
       </list>
     </option>
   </component>
@@ -1386,7 +1412,7 @@
       <workItem from="1462868445270" duration="19561000" />
       <workItem from="1463144621130" duration="21536000" />
       <workItem from="1463356817992" duration="30002000" />
-      <workItem from="1463473729772" duration="4208000" />
+      <workItem from="1463473729772" duration="6102000" />
     </task>
     <task id="LOCAL-00001" summary="adding for readme">
       <created>1456563722392</created>
@@ -1420,7 +1446,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253030000" />
+    <option name="totallyTimeSpent" value="254924000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1500,21 +1526,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/post_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/env/lib/python3.4/site-packages/rest_framework/status.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/html/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -1606,6 +1617,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
           <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1681,14 +1693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/post_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/env/lib/python3.4/site-packages/django/contrib/auth/password_validation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -1747,13 +1751,6 @@
         <state relative-caret-position="5220">
           <caret line="303" column="32" selection-start-line="303" selection-start-column="32" selection-end-line="303" selection-end-column="32" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebApps/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="692" column="1" selection-start-line="692" selection-start-column="1" selection-end-line="692" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1817,24 +1814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/authentication/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="e#17#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/authentication/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="52" column="59" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/login_view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -1847,6 +1826,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="702">
           <caret line="39" column="140" selection-start-line="39" selection-start-column="140" selection-end-line="39" selection-end-column="140" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="e#17#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/html/blog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10">
+          <caret line="194" column="14" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebApps/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="178" column="6" selection-start-line="178" selection-start-column="6" selection-end-line="178" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/post_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebApps/templates/blog/post_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
           <folding />
         </state>
       </provider>
