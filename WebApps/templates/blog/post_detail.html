@@ -5,7 +5,7 @@
 
     <div class="page animated fadeinright">
 
-        <div class="hero-header bg-3 animated fadeindown">
+        <div class="hero-header animated fadeindown">
             <div class="floating-button animated bouncein delay-3">
             <span class="btn-floating resize btn-large waves-effect waves-light accent-color btn z-depth-1">
               <i class="ion-android-bookmark"></i>
@@ -13,36 +13,36 @@
             </div>
         </div>
 
+        <!-- Slider -->
+        <div class="swiper-container slider m-b-20">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{% static 'img/7.jpg' %}" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'img/3.jpg' %}" alt="">
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+        <!-- End of Slider -->
         <!-- Article Content -->
         <div class="animated article fadeinup delay-1">
             <div class="p-10">
-                <h2 class="title">{{ post.title }}</h2>
+                <h4 class="title">{{ post.title }}</h4>
                 <div class="social-share-author animated fadeinright delay-2">
                     <img src="{% static 'img/user5.jpg' %}" alt="" class="avatar">
-                    <div><span>{{ post.author }}, &nbsp;&nbsp;&nbsp;  {{ post.published_date }} </span>
+                    <div><span>{{ post.author.username }}, &nbsp;&nbsp;&nbsp;  {{ post.published_date }} </span>
                         <span>
                             {% if post.author == request.user or request.user.is_staff  %}
-                                <a class="btn-flat" href="{% url 'post_remove' pk=post.pk %}">Delete</a> &nbsp; <a class="btn-flat" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+                                <a class="btn-floating" href="{% url 'post_remove' pk=post.pk %}">삭제</a> &nbsp; <a class="btn-flat" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
                             {% endif %}
                         </span>
                     </div>
                 </div>
                 <p class="text-flow"> <!-- <span class="dropcap"> A </span> -->  {{ post.text }}</p>
            <!--     <blockquote class="primary-border">"The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog."</blockquote> -->
-                <!-- Slider -->
-                <div class="swiper-container slider m-b-20">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="{% static 'img/7.jpg' %}" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{% static 'img/3.jpg' %}" alt="">
-                        </div>
-                    </div>
-                    <!-- Add Pagination -->
-                    <div class="swiper-pagination"></div>
-                </div>
-                <!-- End of Slider -->
              <!--   <p class="text-flow"><b>I am alone:</b> and feel the charm of existence in thisspot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p> -->
 
                 <!-- Share -->

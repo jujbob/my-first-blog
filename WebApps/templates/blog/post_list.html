@@ -16,16 +16,13 @@
                     </div>
                 </div>
                 <div class="image">
-                    <img src="{% static 'img/7.jpg' %}" alt="">
+                    <a href="{% url 'post_detail' pk=post.pk %}"><img src="{% static 'img/7.jpg' %}" alt=""></a>
                     <div class="opacity-overlay-top"></div>
                 </div>
-                <div class="p-10 grey lighten-4">
-                    <h4>{{ post.title }}</h4>
-                    <p>{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }})   </p>
-                    <a href="{% url 'post_detail' pk=post.pk %}" class="waves-effect waves-light btn-flat primary-text">
-                        <i class="ion-ios-arrow-thin-right right"></i>
-                        Read
-                    </a>
+                <div class="p-5 grey lighten-4">
+                    <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
+                    {{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }})
+                    <a href="{% url 'post_detail' pk=post.pk %}">
                 </div>
             </div>
     {% endfor %}
