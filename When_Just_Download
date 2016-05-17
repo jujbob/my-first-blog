@@ -29,7 +29,7 @@ $ git commit -m "Added view and template for detailed blog post as well as CSS f
 $ git push
 
 
-when you want to add new model
+[when you want to add new model]
  1. python manage.py startapp blog
  2. go into blog/models.py --> make new model
  3. generation new database model from models.py
@@ -39,6 +39,31 @@ when you want to add new model
   - from .models import Post
   - admin.site.register(Post)
 
+
+[for facebook sign up and in ]
+ 1. pip install python-social-auth
+ 2. add new app from INSTALLED_APPS
+
+    INSTALLED_APPS에 항목 추가
+    새롭게 설치한 python-social-auth app을 추가합니다.
+    이제 새롭게 User social auths 테이블에 생성되어 Thrid party로 가입한 사용자를 관리할 수 있습니다.
+    TEMPLATE_CONTEXT_PROCESSORS에 항목 추가
+    social.apps.django_app.context_processors.backends
+    social.apps.django_app.context_processors.login_redirect
+    AUTHENTICATION_BACKENDS 새롭게 추가
+    인증 체계에 사용될 backend를 등록하는 항목
+    기본으로 django.contrib.auth.backends.ModelBackend
+    python-social-auth의 facebook을 추가
+    OAuth 관련 변수 설정
+    SOCIAL_AUTH_LOGIN_REDIRECT_URL
+    로그인 후 되돌아올 URL
+    SOCIAL_AUTH_URL_NAMESPACE
+    인증 URL의 Namespace
+    SOCIAL_AUTH_FACEBOOK_KEY/Secret
+    Facebook 인증 Key/Secret
+    SESSION_SERIALIZER
+    세션 객체를 직렬화하는 처리기
+    참고자료
 
 [for rest_framework]
 

@@ -1,4 +1,5 @@
 from authentication.forms import AccountForm
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from rest_framework import permissions, viewsets, status
@@ -50,14 +51,19 @@ def login_user(request):
 
 def sign_up(request):
 
-    if request.method =='POST':
-        form = AccountForm()
-        return HttpResponse("here is a test")
-    else:
-        form = AccountForm()
-        return render(request, 'blog/sign_up.html', {'form': form})
+    if request.method == "POST":
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #user = form.save(commit=False)
+            #user.email = form.cleaned_data['email']
+            #user.save()
+            return render(request, 'blog/sign_up_ok.html')
 
+    elif request.method == "GET":
+        form = AccountForm()
 
+    return render(request, "blog/sign_up.html", {"form": form,})
 
 #for restframework
 class AccountViewSet(viewsets.ModelViewSet):

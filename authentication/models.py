@@ -1,6 +1,8 @@
 
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core import validators
+from django.core.mail import send_mail
 from django.db import models
 
 
@@ -37,7 +39,15 @@ class AccountManager(BaseUserManager):
 class Account(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=100, unique=True)
-    username = models.CharField(max_length=80, unique=True)
+    username = models.CharField(('username'), max_length=30, unique=True,
+                                help_text=('Required. 30 characters or fewer. Letters, digits'
+                                            ' and ./+/-/_ only.'),
+                                error_messages={
+                                    'invalid': "Username may contain only letters, numbers and "
+                                               "@.+-_ characters."},
+                                validators=[
+                                    validators.RegexValidator(r'^[\w.+-]+$', ('Enter a valid username jebal.'), 'invalid')
+                                ])
 
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
@@ -64,3 +74,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        """
+        Sends an email to this User.
+        """
+        send_mail(subject, message, from_email, [self.email], **kwargs)
