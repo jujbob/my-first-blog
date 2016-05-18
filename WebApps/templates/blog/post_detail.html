@@ -98,6 +98,9 @@
                     {% empty %}
                         <span>No comments here yet :(</span>
                     {% endfor %}
+                    <div style="width: 100%">
+                        <textarea class="input-field" type="text" style="height: 5rem;width: 85%; margin-top: 0px; margin-bottom: 0px"> abc </textarea> <a class="btn-floating" style="float: right; width: 13%;height: 5rem;border-radius: 10%; text-align: center" href="#">리플</a>
+                    </div>
                     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
                 </div>
             </div>
