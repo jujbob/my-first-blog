@@ -11,8 +11,8 @@
                 <div class="header-hover">
                     <img class="avatar" src="{% static 'img/user5.jpg' %}" alt="">
                     <div class="details">
-                        <span>{{ post.author }}</span>
-                        <span class="small">{{ post.published_date }}</span>
+                        <span>{{ post.author.username }}</span>
+                        <span class="small">{{ post.created_date }}</span>
                     </div>
                 </div>
                 <div class="image">
@@ -22,7 +22,6 @@
                 <div class="p-5 grey lighten-4">
                     <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
                     {{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }})
-                    <a href="{% url 'post_detail' pk=post.pk %}">
                 </div>
             </div>
     {% endfor %}

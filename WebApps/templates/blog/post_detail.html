@@ -29,57 +29,65 @@
         <!-- End of Slider -->
         <!-- Article Content -->
         <div class="animated article fadeinup delay-1">
-            <div class="p-10">
-                <h4 class="title">{{ post.title }}</h4>
+            <div class="p-5">
+                <h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5>
                 <div class="social-share-author animated fadeinright delay-2">
-                    <img src="{% static 'img/user5.jpg' %}" alt="" class="avatar">
-                    <div><span>{{ post.author.username }}, &nbsp;&nbsp;&nbsp;  {{ post.published_date }} </span>
-                        <span>
+                    <div>
+                        <img src="{% static 'img/user5.jpg' %}" alt="" class="avatar">
+                        <span class="small">
+                            {{ post.author.username }}
                             {% if post.author == request.user or request.user.is_staff  %}
-                                <a class="btn-floating" href="{% url 'post_remove' pk=post.pk %}">삭제</a> &nbsp; <a class="btn-flat" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+                                <div style="float: right"><a class="btn-floating" style="text-align: center;" href="{% url 'post_remove' pk=post.pk %}">삭제</a> &nbsp; <a class="btn-floating" style="text-align: center;" href="{% url 'post_edit' pk=post.pk %}">수정</a></div>
                             {% endif %}
+                            <p style="margin-bottom: 10px">{{ post.created_date }}</p>
                         </span>
                     </div>
                 </div>
-                <p class="text-flow"> <!-- <span class="dropcap"> A </span> -->  {{ post.text }}</p>
+                <p class="text-flow" style="margin-bottom: 10px"> <!-- <span class="dropcap"> A </span> -->  {{ post.text }}</p>
            <!--     <blockquote class="primary-border">"The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog."</blockquote> -->
              <!--   <p class="text-flow"><b>I am alone:</b> and feel the charm of existence in thisspot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p> -->
 
                 <!-- Share -->
                 <div class="share center-align">
-                    <h5>Share it!</h5>
-                    <i class="ion-social-facebook p-20 blue-text text-darken-4"></i>
-                    <i class="ion-social-twitter p-20 blue-text"></i>
-                    <i class="ion-social-pinterest p-20 red-text"></i>
+                  <span>Share it!</span>
+                    <i class="ion-social-facebook p-5 blue-text text-darken-4"></i>
+                    <i class="ion-social-twitter p-5 blue-text"></i>
+                    <i class="ion-social-pinterest p-5 red-text"></i>
                 </div>
 
             <!-- comments -->
                 <div class="comments grey lighten-4">
-                    <h5> 5 Comments</h5>
                     {% for comment in post.comments.all %}
 
                         <div class="media-top-object animated fadeinright delay-2">
                             <img src="{% static 'img/user5.jpg' %}" alt="" class="media-left avatar">
                             <div class="media-body">
-                                <span> {{ comment.author }} &nbsp; {{ comment.created_date }} &nbsp; &nbsp; &nbsp;
-                                    {% if comment.author == request.user %}
-                                        <a class="btn-flat" href="{% url 'comment_remove' pk=comment.pk %}"> delete</a>
-                                    {% endif %}</span>
-                                <span class="small">{{ comment.text }}</span>
+                                <span class="small"> <b>{{ comment.author.username }}</b>
+                                    <div style="float: right">
+                                        {% if comment.author == request.user %}
+                                            <a class="btn-floating" style="width: 30px;height: 30px;line-height: 30px;border-radius: 10%; text-align: center" href="{% url 'comment_remove' pk=comment.pk %}">삭제</a>
+                                        {% endif %}
+                                            <a class="btn-floating" style="width: 30px;height: 30px;line-height: 30px;border-radius: 10%; text-align: center" href="{% url 'add_subComment_to_post' post_pk=post.pk comment_pk=comment.pk %}">리플</a>
+                                    </div>
+                                    <p class="small">{{ comment.created_date }}</p>
+                                </span>
+                                <span>{{ comment.text }}</span>
                             </div>
-                            <a href="{% url 'add_subComment_to_post' post_pk=post.pk comment_pk=comment.pk %}"><p class="btn-flat">reply</p></a>
                         </div>
 
                         {% for subComment in comment.subComments.all %} <!-- start point about subComments -->
                             <div class="media-top-object animated fadeinright delay-2">
 
-                                <img src="{% static 'img/reply.gif' %}" alt="" class="media-left avatar" >
+                                <img src="{% static 'img/reply.gif' %}" alt="" class="media-left reply" >
                                 <img src="{% static 'img/user5.jpg' %}" alt="" class="media-left avatar">
                                 <div class="media-body">
-                                        <span> {{ subComment.author }} &nbsp; {{ subComment.created_date }} &nbsp; &nbsp; &nbsp;
-                                            {% if subComment.author == request.user %}
-                                                <a class="btn-flat" href="{% url 'subComment_remove' pk=subComment.pk %}"> delete</a>
-                                            {% endif %}
+                                        <span class="small"> <b>{{ subComment.author.username }}</b>
+                                            <div style="float: right">
+                                                {% if subComment.author == request.user %}
+                                                    <a class="btn-floating" style="width: 30px;height: 30px;line-height: 30px;border-radius: 10%; text-align: center" href="{% url 'subComment_remove' pk=subComment.pk %}">삭제</a>
+                                                {% endif %}
+                                            </div>
+                                            <p class="small"> {{ subComment.created_date }} </p>
                                         </span>
                                     <span class="small">{{ subComment.text|linebreaks }}</span>
                                 </div>
@@ -88,7 +96,7 @@
                         {% endfor %}
 
                     {% empty %}
-                        <p>No comments here yet :(</p>
+                        <span>No comments here yet :(</span>
                     {% endfor %}
                     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
                 </div>
