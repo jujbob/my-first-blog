@@ -13,7 +13,7 @@ from blog.permissions import IsOwnerOrReadOnly
 
 def post_list(request):
 
-    page_data = Paginator(Post.objects.all(), 10)
+    page_data = Paginator(Post.objects.order_by('-created_date'), 10)
     page = request.GET.get('page')
 
     if page is None:
@@ -32,7 +32,8 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    form = CommentForm()
+    return render(request, 'blog/post_detail.html', {'post': post, 'form': form})
 
 @login_required
 def post_new(request):

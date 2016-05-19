@@ -43,7 +43,7 @@
                         </span>
                     </div>
                 </div>
-                <p class="text-flow" style="margin-bottom: 10px"> <!-- <span class="dropcap"> A </span> -->  {{ post.text }}</p>
+                <p class="text-flow" style="margin-bottom: 10px;white-space: pre-line;"> <!-- <span class="dropcap"> A </span> -->  {{ post.text }}</p>
            <!--     <blockquote class="primary-border">"The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog."</blockquote> -->
              <!--   <p class="text-flow"><b>I am alone:</b> and feel the charm of existence in thisspot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p> -->
 
@@ -71,7 +71,7 @@
                                     </div>
                                     <p class="small">{{ comment.created_date }}</p>
                                 </span>
-                                <span>{{ comment.text }}</span>
+                                <span style="white-space: pre-line;">{{ comment.text }}</span>
                             </div>
                         </div>
 
@@ -94,16 +94,64 @@
                             </div>
 
                         {% endfor %}
-
                     {% empty %}
                         <span>No comments here yet :(</span>
                     {% endfor %}
                     <div style="width: 100%">
-                        <textarea class="input-field" type="text" style="height: 5rem;width: 85%; margin-top: 0px; margin-bottom: 0px"> abc </textarea> <a class="btn-floating" style="float: right; width: 13%;height: 5rem;border-radius: 10%; text-align: center" href="#">리플</a>
+                        <form method="POST" action="{% url 'add_comment_to_post' post.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" id="pk" value="{{ post.id }}" />
+                            <div>
+                                <div style="width: 85%; float: left;">{{ form.text }} </div>
+                                <div style="float: right;width: 14%"><button class="btn-floating" style="width: 100%; height: 3rem;border-radius: 1%; text-align: center" href="#">리플</button></div>
+                            </div>
+                        </form>
                     </div>
-                    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
                 </div>
             </div>
         </div>
     </div>
+    <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
+    <script>
+        (function() {
+
+            var textarea = $('#id_text'),
+                    originHeight = textarea.height(),
+                    originClientHeight = textarea[0].clientHeight,
+                    clone = textarea.clone(),
+                    extraHeight = parseInt(textarea.css('fontSize')),
+                    timer, content, cloneScrollHeight;
+
+            clone
+                    .removeAttr('id')
+                    .removeAttr('name')
+                    .css({
+                        position: 'absolute',
+                        top: 0,
+                        left: -9999,
+                        overflow: 'hidden'
+                    }).appendTo('body');
+
+            textarea.focus(function() {
+
+                timer = setInterval(function() {
+                    content = textarea.val();
+                    clone.val(content);
+                    cloneScrollHeight = clone[0].scrollHeight;
+
+                    if (originClientHeight < cloneScrollHeight) {
+                        textarea.css('height', cloneScrollHeight + extraHeight);
+                    } else if (originClientHeight === cloneScrollHeight) {
+                        textarea.css('height', originHeight);
+                    }
+                }, 100);
+
+            });
+
+            textarea.blur(function() {
+                clearInterval(timer);
+            });
+
+        })();
+    </script>
 {% endblock %}
