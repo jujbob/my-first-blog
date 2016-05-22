@@ -33,9 +33,10 @@ urlpatterns = patterns(
     url(r'^subComment/(?P<pk>\d+)/remove/$', views.subComment_remove, name='subComment_remove'),
 
     # for resources based on post #
-    url(r'^media/image/(?P<pk>\d+)$', views.image_detail, name='image_detail'),
-    url(r'^media/image/new/$', views.image_new, name='image_new'),
-    url(r'^media/image/edit/$', views.image_edit, name='image_edit')
+    url(r'^resource/(?P<pk>\d+)$', views.resource_detail, name='resource_detail'),
+    url(r'^resource/new/$', views.resource_new, name='resource_new'),
+    url(r'^resource/edit/$', views.resource_edit, name='resource_edit'),
+
 
 )
 

@@ -18,21 +18,22 @@ class Post(models.Model):
         return self.title
 
 class Resource(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='resources')
+#    post = models.ForeignKey('blog.Post', related_name='resources')
     image_file = models.ImageField(upload_to='image/original/%Y/%m/%d')
     filtered_image_file = models.ImageField(null=True, upload_to='image/filtered/%Y/%m/%d')
-    movie_file = models.FileField(null=True, upload_to='movie/%Y/%m/%d')
-    external_url = models.TextField(max_length=1024, null=True)
+#    movie_file = models.FileField(null=True, upload_to='movie/%Y/%m/%d')
+    external_url = models.TextField(max_length=1024, blank=True)
     created_date = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     def delete(self, *args, **kwargs):
         self.image_file.delete()
         self.filtered_image_file.delete()
-        self.movie_file.delete()
+ #       self.movie_file.delete()
         super(Resource, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('image_detail', kwargs={'pk': self.id})
+        return reverse_lazy('resource_detail', kwargs={'pk': self.id})
+
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')

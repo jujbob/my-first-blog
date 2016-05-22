@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Comment, SubComment, Resource
 from blog.forms import PostForm, CommentForm, SubCommentForm, ResourceForm
 from django.contrib.auth.decorators import login_required
+from django.template.defaultfilters import pprint
 from rest_framework import viewsets, permissions
 from blog.serializers import PostSerializer, CommentSerializer, SubCommentSerializer
 from blog.permissions import IsOwnerOrReadOnly
@@ -163,29 +164,40 @@ def subComment_remove(request, pk):
 
 
 
-def image_detail(request, pk):
+def resource_detail(request, pk):
     image = get_object_or_404(Resource, pk=pk)
     message = '<p>포스트번호:{0}, img:{1}</p> <img src={1}></img>'.format(image.post_id, image.image_file.url)
     return HttpResponse(message)
 
-def image_new(request):
+def resource_new(request):
+    if request.method == "GET":
+        edit_form = ResourceForm()
+        pprint('hewefre')
+    elif request.method == "POST":
+        pprint('heeeeeeewre')
+        edit_form = ResourceForm(request.POST, request.FILES)
 
-    if request.method == 'GET':
-        form = ResourceForm()
-    elif request.method == 'POST':
-        form = ResourceForm(request.POST, request.FILES)
-        if form.is_valid():
-            new_photo = form.save()
+        if edit_form.is_valid():
+            new_photo = edit_form.save()
+
             return redirect(new_photo.get_absolute_url())
 
-    return render(request, 'blog/image_new.html', {form: form})
+    return render(
+        request,
+        'blog/resource_new.html',
+        {
+            'form': edit_form,
+        }
+    )
 
-
-def image_edit(request, pk):
+def resource_edit(request, pk):
     return HttpResponse("notting")
 
 
+def image_new(request):
 
+    form = ImageForm()
+    return render(request, 'blog/image_new.html', {form: form})
 
 
 ### for rest framework api  ###

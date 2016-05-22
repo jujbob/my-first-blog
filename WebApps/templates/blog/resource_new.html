@@ -1,13 +1,9 @@
-{% extends 'blog/layout.html' %}
+{% extends 'blog/base.html' %}
 
 {% block content %}
-    <form
-            method="POST"
-            action="{% url 'image_new' %}"
-            enctype="multipart/form-data"
-    >
+    <H1>New</H1>
+    <form method="POST" action="{% url 'resource_new' %}" enctype="multipart/form-data">
         {% csrf_token %}
-
         {{form.as_p}}
 
         {% comment %}
