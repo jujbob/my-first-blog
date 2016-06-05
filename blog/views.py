@@ -29,6 +29,10 @@ def post_list(request):
     except EmptyPage:
         posts = page_data.page(page_data.num_pages)
 
+    for post in posts:
+        if len(post.text) > 300:
+            post.text = post.text[1:300] + "..... 더보기(more)"
+
     return render(request, 'blog/post_list.html', {'posts': posts, 'current_page': page, 'total_page': range(1, page_data.num_pages + 1)})
 
 def post_detail(request, pk):

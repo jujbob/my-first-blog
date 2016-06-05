@@ -386,7 +386,7 @@ footer.page-footer .footer-copyright {
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
-  margin-bottom: 1em;
+  margin-bottom: 5px;
 }
 .media-top-object .media-left {
   display: block;
