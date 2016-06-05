@@ -3,6 +3,7 @@
 {% block content %}
     {% load staticfiles %}
 
+
     <div class="page animated fadeinright">
 
         <div class="hero-header animated fadeindown">
@@ -13,24 +14,24 @@
             </div>
         </div>
 
-        <!-- Slider -->
-        <div class="swiper-container slider m-b-20">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="{% static 'img/7.jpg' %}" alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img src="{% static 'img/3.jpg' %}" alt="">
-                </div>
-            </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
-        </div>
-        <!-- End of Slider -->
         <!-- Article Content -->
-        <div class="animated article fadeinup delay-1">
-            <div class="p-5">
-                <h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5>
+        <div class="animated article fadeinup delay-1" style="border:1px solid white; border-radius: 5px">
+            <div class="p-10" style="background-color: white">
+                <!-- Slider -->
+                <div class="swiper-container slider m-b-20">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{% static 'img/7.jpg' %}" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'img/3.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+                <!-- End of Slider -->
+                <h5 style="margin-bottom: 10px;font-weight: 600"> <blockquote class="primary-border">{{ post.title }} </blockquote></h5>
                 <div class="social-share-author animated fadeinright delay-2">
                     <div>
                         <img src="{% static 'img/user5.jpg' %}" alt="" class="avatar">
@@ -43,6 +44,7 @@
                         </span>
                     </div>
                 </div>
+
                 <p class="text-flow" style="margin-bottom: 10px;white-space: pre-line;"> <!-- <span class="dropcap"> A </span> -->  {{ post.text }}</p>
            <!--     <blockquote class="primary-border">"The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog."</blockquote> -->
              <!--   <p class="text-flow"><b>I am alone:</b> and feel the charm of existence in thisspot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p> -->
@@ -111,7 +113,7 @@
             </div>
         </div>
     </div>
-    <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
+{% comment %}    <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
     <script>
         (function() {
 
@@ -153,5 +155,5 @@
             });
 
         })();
-    </script>
+    </script>{% endcomment %}
 {% endblock %}

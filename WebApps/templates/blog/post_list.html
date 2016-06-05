@@ -7,7 +7,7 @@
 
         {% for post in posts %}
 
-            <div class="card">
+            <div class="card" style="border:1px solid white; border-radius: 5px">
                 <div class="header-hover">
                     <img class="avatar" src="{% static 'img/user5.jpg' %}" alt="">
                     <div class="details">
@@ -15,27 +15,29 @@
                         <span class="small">{{ post.created_date }}</span>
                     </div>
                 </div>
-                <div class="image">
-                    <a href="{% url 'post_detail' pk=post.pk %}"><img src="{% static 'img/7.jpg' %}" alt=""></a>
+                <a href="{% url 'post_detail' pk=post.pk %}">
+                <div class="image m-10">
+                    <img src="{% static 'img/3.jpg' %}" alt="">
                     <div class="opacity-overlay-top"></div>
                 </div>
+                </a>
                 <div class="p-5 grey lighten-4">
                     <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
                     {{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }})
                 </div>
             </div>
-    {% endfor %}
-
-    <!-- pagination -->
-    <div class="valign center-align w-100">
-        {% for page in total_page %}
-            {% if current_page != page %}
-                <span><a href="?page={{ page }}">{{ page }} </a></span>
-            {% else %}
-               <span><b>{{ page }}</b></span>
-            {% endif %}
         {% endfor %}
-    </div>
+
+        <!-- pagination -->
+        <div class="valign center-align w-100">
+            {% for page in total_page %}
+                {% if current_page != page %}
+                    <span><a href="?page={{ page }}">{{ page }} </a></span>
+                {% else %}
+                   <span><b>{{ page }}</b></span>
+                {% endif %}
+            {% endfor %}
+        </div>
 
     </div>
 {% endblock content %}
