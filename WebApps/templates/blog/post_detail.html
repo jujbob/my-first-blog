@@ -18,14 +18,13 @@
         <div class="animated article fadeinup delay-1" style="border:1px solid white; border-radius: 5px">
             <div class="p-10" style="background-color: white">
                 <!-- Slider -->
-                <div class="swiper-container slider m-b-20">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="{% static 'img/7.jpg' %}" alt="">
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{% static 'img/3.jpg' %}" alt="">
-                        </div>
+                <div class="swiper-container slider m-b-20" style="border: 1px solid blanchedalmond">
+                    <div class="swiper-wrapper" style="margin: auto;" >
+                        {% for resource in post.resources.all %}
+                            <div class="swiper-slide">
+                                <img src="/medias/{{ resource.image_file }}" alt="">
+                            </div>
+                        {% endfor %}
                     </div>
                     <!-- Add Pagination -->
                     <div class="swiper-pagination"></div>
@@ -60,7 +59,6 @@
             <!-- comments -->
                 <div class="comments grey lighten-4">
                     {% for comment in post.comments.all %}
-
                         <div class="media-top-object animated fadeinright delay-2">
                             <img src="{% static 'img/user5.jpg' %}" alt="" class="media-left avatar">
                             <div class="media-body">

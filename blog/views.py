@@ -1,11 +1,14 @@
 
 # coding: utf-8
+from django.core.checks import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.forms import modelformset_factory
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Comment, SubComment, Resource
 from blog.forms import PostForm, CommentForm, SubCommentForm, ResourceForm
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
 from django.template.defaultfilters import pprint
 from rest_framework import viewsets, permissions
 from blog.serializers import PostSerializer, CommentSerializer, SubCommentSerializer
@@ -40,19 +43,53 @@ def post_detail(request, pk):
     form = CommentForm()
     return render(request, 'blog/post_detail.html', {'post': post, 'form': form})
 
+
+@login_required
+def post_new(request):
+
+#    ImageFormSet = modelformset_factory(Resource, form=ResourceForm, extra=3)
+
+    if request.method == "POST":
+        postForm = PostForm(request.POST)
+        formset = ResourceForm(request.POST, request.FILES)
+        if postForm.is_valid():
+            post = postForm.save(commit=False)
+            post.author = request.user
+            post.save()
+            for image in request.FILES.getlist("images", []):
+                photo = Resource(post=post, image_file=image)
+                photo.save()
+            return redirect('blog.views.post_detail', pk=post.pk)
+        #        for form in formset.cleaned_data:
+        #            image = form['image_file']
+        #            photo = Resource(post=post, image_file=image)
+        #            photo.save()
+
+    else:
+        postForm = PostForm()
+        formset = ResourceForm()
+        return render(request, 'blog/post_edit.html', {'postForm': postForm, 'formset': formset}, context_instance=RequestContext(request))
+"""
 @login_required
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
+        resourceForm = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-#            post.published_date = timezone.now()
             post.save()
-            return redirect('blog.views.post_detail', pk=post.pk)
+
+            resource = resourceForm.save()
+            #resource = resourceForm.save(commit=False)
+            resource.post = post
+            resource.save()
+        return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+        resourceForm = ResourceForm()
+    return render(request, 'blog/post_edit.html', {'form': form, 'resourceForm': resourceForm})
+"""
 
 
 def errors(request):
@@ -198,10 +235,6 @@ def resource_edit(request, pk):
     return HttpResponse("notting")
 
 
-def image_new(request):
-
-    form = ImageForm()
-    return render(request, 'blog/image_new.html', {form: form})
 
 
 ### for rest framework api  ###
