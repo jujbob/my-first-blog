@@ -1,0 +1,99 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% load staticfiles %}
+
+    <div class="page animated fadeinright">
+
+        <!-- Hero Header -->
+        <div class="hero-header hero-big bg-v-4">
+            <div class="about animated fadeinright delay-1">
+                <img class="avatar" src="{% static 'img/user5.jpg' %}">
+                <h2 class="white-text m-0">{{ author.username }}</h2>
+                <p class="white-text m-0">Blogger / Intermediate / Student.</p>
+                <a class="waves-effect waves-light btn primary-color m-20" href="profile.html">Follow</a>
+            </div>
+        </div>
+
+        <!-- Social Counter -->
+        <div class="row m-0" style="background-color: white">
+            <div class="col s4 p-20 center">
+                <h4 class="m-0"><strong>350</strong></h4>
+                <p class="m-0 grey-text small">Followers</p>
+            </div>
+            <div class="col s4 p-20 center">
+                <h4 class="m-0"><strong>120</strong></h4>
+                <p class="m-0 grey-text small">Pins</p>
+            </div>
+            <div class="col s4 p-20 center">
+                <h4 class="m-0"><strong>846</strong></h4>
+                <p class="m-0 grey-text small">Like</p>
+            </div>
+        </div>
+
+        <!-- Profile Contents -->
+        <ul class="tabs border-top animated fadeinup delay-2">
+            <li class="tab col s3"><a class="active" href="#post">Post</a></li>
+            <li class="tab col s3"><a class="active" href="#about">About</a></li>
+        </ul>
+
+        <div id="about" class="p-20" style="background-color: white">
+            <p class="text-flow m-0">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
+            <p class="text-flow">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
+        </div>
+
+        <div id="post">
+            <div class="page_profile animated fadeinright">
+
+                {% for post in posts %}
+
+                    <div class="card" style="border:1px solid white; border-radius: 5px">
+                        <div class="header-hover m-10">
+                            <img class="avatar_left" style="float: left" src="{% static 'img/user5.jpg' %}" alt="">
+                            <div>
+                                <font class="small"> {{ post.author.username }}</font>
+                                <div style="float: right">
+                                    <span class="status"><B>Student</B></span>
+                                    <span class="status" style="text-align: center;" >6.5</span>
+                                    <span class="status" style="text-align: center;" >Helper</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                {{ post.created_date }}
+                            </div>
+                        </div>
+                        <a href="{% url 'post_detail' pk=post.pk %}">
+                            <div class="image m-10">
+                                {% if post.resources.first.image_file %}
+                                    <img src="/medias/{{ post.resources.first.image_file }}" alt="">
+                                    <div class="opacity-overlay-top"></div>
+                                {% else %}
+
+                                {% endif %}
+                            </div>
+                        </a>
+                        <div class="p-5 grey lighten-4">
+                            <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
+                            <blockquote>{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }}) </blockquote>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!-- pagination -->
+                <div class="valign center-align w-100">
+                    {% for page in total_page %}
+                        {% if current_page != page %}
+                            <span><a href="?page={{ page }}">{{ page }} </a></span>
+                        {% else %}
+                            <span><b>{{ page }}</b></span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

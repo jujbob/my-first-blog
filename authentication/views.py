@@ -1,7 +1,7 @@
 from authentication.forms import AccountForm
-from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from blog.models import Post
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import permissions, viewsets, status
 
 from authentication.models import Account
@@ -9,12 +9,37 @@ from authentication.permissions import IsAccountOwner
 from authentication.serializers import AccountSerializer
 from rest_framework.response import Response
 
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout
 
 
 
 def login_view(request):
     return render(request, 'blog/login_view.html')
+
+def profile(request, pk):
+
+#    return render(request, 'blog/profile.html')
+    page = request.GET.get('page')
+    author = get_object_or_404(Account, pk=pk)
+    page_data = Paginator(Post.objects.filter(author=author).order_by('-created_date'), 10)
+
+    if page is None:
+        page = 1
+    else:
+        page = int(page)
+
+    try:
+        posts = page_data.page(page)
+    except PageNotAnInteger:
+        posts = page_data.page(1)
+    except EmptyPage:
+        posts = page_data.page(page_data.num_pages)
+
+    for post in posts:
+        if len(post.text) > 300:
+            post.text = post.text[1:300] + "..... 더보기(more)"
+
+    return render(request, 'blog/profile.html', {'posts': posts, 'author': author, 'current_page': page, 'total_page': range(1, page_data.num_pages + 1)})
 
 def logout_user(request):
     logout(request)

@@ -8,22 +8,34 @@
         {% for post in posts %}
 
             <div class="card" style="border:1px solid white; border-radius: 5px">
-                <div class="header-hover">
-                    <img class="avatar" src="{% static 'img/user5.jpg' %}" alt="">
-                    <div class="details">
-                        <span>{{ post.author.username }}</span>
-                        <span class="small">{{ post.created_date }}</span>
+                <div class="header-hover m-10">
+                    <img class="avatar_left" style="float: left" src="{% static 'img/user5.jpg' %}" alt="">
+                    <div>
+                        <a href="/auth/profile/{{ post.author.pk }}"><B>{{ post.author.username }}</B></a>
+                        <div style="float: right">
+                            <span class="status"><B>Student</B></span>
+                            <span class="status" style="text-align: center;" >6.5</span>
+                            <span class="status" style="text-align: center;" >Helper</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        {{ post.created_date }}
                     </div>
                 </div>
                 <a href="{% url 'post_detail' pk=post.pk %}">
                 <div class="image m-10">
-                    <img src="{% static 'img/3.jpg' %}" alt="">
-                    <div class="opacity-overlay-top"></div>
+                    {% if post.resources.first.image_file %}
+                        <img src="/medias/{{ post.resources.first.image_file }}" alt="">
+                        <div class="opacity-overlay-top"></div>
+                    {% else %}
+
+                    {% endif %}
                 </div>
                 </a>
                 <div class="p-5 grey lighten-4">
                     <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
-                    {{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }})
+                    <blockquote>{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }}) </blockquote>
                 </div>
             </div>
         {% endfor %}
@@ -32,12 +44,11 @@
         <div class="valign center-align w-100">
             {% for page in total_page %}
                 {% if current_page != page %}
-                    <span><a href="?page={{ page }}">{{ page }} </a></span>
+                    <span><a href="?page={{ page }}&category={{ category }}">{{ page }} </a></span>
                 {% else %}
                    <span><b>{{ page }}</b></span>
                 {% endif %}
             {% endfor %}
         </div>
-
     </div>
 {% endblock content %}

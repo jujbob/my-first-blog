@@ -279,7 +279,7 @@ h1.title.big {
               center / cover;
 }
 .bg-v-4 {
-  background: url(../img/v4.jpg) 
+  background: url(../img/3.jpg)
               no-repeat 
               center / cover;
 }
@@ -358,6 +358,10 @@ h1.title.big {
   margin-top: 40px;
   overflow: auto;
 }
+.page_profile {
+    margin-top: 10px;
+    overflow: auto;
+}
 .page.fullscreen {
   height: calc(100vh - 56px);
 }
@@ -419,7 +423,7 @@ footer.page-footer .footer-copyright {
 }
 .hero-header.hero-big {
   text-align: center;
-  padding-top: 70vh;
+  padding-top: 40vh;
 }
 .hero-big .about {
   position: absolute;
@@ -777,6 +781,12 @@ footer.page-footer .footer-copyright {
     width: 40px;
     height: 40px;
     border-radius: 2px;
+}
+.avatar_left {
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    float: left;
 }
 .reply {
     width: 20px;
@@ -1196,18 +1206,30 @@ textarea.materialize-textarea {
   display: inline;
 }
 .card .header-hover {
-    padding: 20px 20px 20px 80px;
-    position: absolute;
+ /*   padding: 20px 20px 20px 80px; */
+/*    position: absolute; */
     top: 0;
     left: 0;
     right: 0;
     z-index: 1;
-    color: #fff;
+    color: black;
 }
+
+.card .status {
+    display: inline-block;
+    padding: 3px 4px 2px 4px;
+    margin-right: 3px;
+    background: #e0e3e3;
+    color: #657070;
+    font-size: 11px;
+    border: 1px solid #ced3d3;
+    border-radius: 3px;
+}
+
 .card .header-hover img {
-    position: absolute;
+/*    position: absolute;
     top: 20px;
-    left: 20px;
+    left: 20px; */
 }
 .card .details span {
     display: block;

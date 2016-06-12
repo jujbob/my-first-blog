@@ -17,8 +17,14 @@ from blog.permissions import IsOwnerOrReadOnly
 
 def post_list(request):
 
-    page_data = Paginator(Post.objects.order_by('-created_date'), 10)
+    category = request.GET.get('category')
     page = request.GET.get('page')
+    if category == "my_post":
+        page_data = Paginator(Post.objects.filter(author=request.user).order_by('-created_date'), 10)
+    elif category == "news_feed":
+        page_data = Paginator(Post.objects.order_by('-created_date'), 10)
+    else:
+        page_data = Paginator(Post.objects.order_by('-created_date'), 10)
 
     if page is None:
         page = 1
@@ -36,7 +42,7 @@ def post_list(request):
         if len(post.text) > 300:
             post.text = post.text[1:300] + "..... 더보기(more)"
 
-    return render(request, 'blog/post_list.html', {'posts': posts, 'current_page': page, 'total_page': range(1, page_data.num_pages + 1)})
+    return render(request, 'blog/post_list.html', {'posts': posts, 'current_page': page, 'category': category, 'total_page': range(1, page_data.num_pages + 1)})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -105,7 +111,7 @@ def post_edit(request, pk):
 
     # To check that the post is existing or not
     post = get_object_or_404(Post, pk=pk)
-
+#    post = Post.objects.get(pk=pk)
     # To check about user
     if request.user != post.author:
         return redirect('blog.views.errors')
@@ -117,10 +123,19 @@ def post_edit(request, pk):
             post.author = request.user
 #            post.published_date = timezone.now()
             post.save()
-            return redirect('blog.views.post_detail', pk=post.pk)
+            if request.FILES.getlist("images", []):
+                for resource in post.resources.all():
+                    resource.delete()
+                for image in request.FILES.getlist("images", []):
+                    photo = Resource(post=post, image_file=image)
+                    photo.save()
+                return redirect('blog.views.post_detail', pk=post.pk)
+            else:
+                return redirect('blog.views.post_detail', pk=post.pk)
     else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+        postForm = PostForm(instance=post)
+        formset = ResourceForm(instance=post)
+    return render(request, 'blog/post_edit.html', {'postForm': postForm, 'formset': formset}, context_instance=RequestContext(request))
 
 @login_required
 def post_draft_list(request):
