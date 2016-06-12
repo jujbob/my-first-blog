@@ -35,7 +35,7 @@
                 </a>
                 <div class="p-5 grey lighten-4">
                     <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
-                    <blockquote>{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }}) </blockquote>
+                    <blockquote style="margin: 0px 0px">{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }}) </blockquote>
                 </div>
             </div>
         {% endfor %}

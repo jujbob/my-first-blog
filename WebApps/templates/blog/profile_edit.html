@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <!-- Page Contents -->
+    <div class="page fullscreen valign-wrapper animated fadeinright" xmlns="http://www.w3.org/1999/html">
+
+        <div class="valign center-align w-100">
+            <h1 class="m-0"><strong>BuddyLang</strong></h1>
+            <h5>Edit your Account</h5>
+                <form action="{% url 'profile_edit' %}" method="post">
+                {% csrf_token %}
+                    <div class="p-20">
+
+                        <div class="input-field center">
+                            <label for="login-psw">Username</label>
+                            <b>{{ form.username.errors|striptags }}</b>
+                            {{ form.username }}
+                        </div>
+
+                        <div class="input-field center">
+                            <label for="login-psw">Password</label>
+                            <b>{{ form.password1.errors|striptags }}</b>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="input-field center">
+                            <label for="login-psw2">Confirm</label>
+                            <b>{{ form.password2.errors|striptags }}</b>
+                            {{ form.password2 }}
+                        </div>
+                    </div>
+                    <button type="submit" class="waves-effect waves-light btn-large primary-color block m-20 animated bouncein delay-4">Sign Up</button>
+
+                </form>
+        </div>
+    </div>
+    <!-- End of Page Contents -->
+    </div><!-- End of Main Container -->
+
+{% endblock %}

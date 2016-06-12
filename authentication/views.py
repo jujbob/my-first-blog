@@ -1,5 +1,6 @@
-from authentication.forms import AccountForm
+from authentication.forms import AccountForm, AccountFormDetail
 from blog.models import Post
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import permissions, viewsets, status
@@ -40,6 +41,15 @@ def profile(request, pk):
             post.text = post.text[1:300] + "..... 더보기(more)"
 
     return render(request, 'blog/profile.html', {'posts': posts, 'author': author, 'current_page': page, 'total_page': range(1, page_data.num_pages + 1)})
+
+@login_required
+def profile_edit(request):
+    if request.method == 'POST':
+        return redirect('profile_edit')
+
+    elif request.method == 'GET':
+        accountForm = AccountFormDetail()
+    return render('blog/profile_edit.html', {'accountForm': accountForm,})
 
 def logout_user(request):
     logout(request)

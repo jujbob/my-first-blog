@@ -16,8 +16,10 @@ class AccountForm(UserCreationForm):
         model = Account
         fields = ('email', 'username', 'password1', 'password2', )
 
-
-
+class AccountFormDetail(UserCreationForm):
+    class Meta:
+        model = Account
+        fields = ('username', 'password1', 'password2')
 
 
 '''

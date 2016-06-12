@@ -57,7 +57,7 @@
                     {% if user.is_authenticated %}
                         <img class="circle avatar" src="{% static 'img/user5.jpg' %}" alt="">
                         <div class="avatar-body">
-                            <a class="title" href="{% url 'profile_user' pk=user.pk %}"> <h3>{{ user.username }}</h3></a>
+                            <a class="title" href="{% url 'profile_detail' pk=user.pk %}"> <h3>{{ user.username }}</h3></a>
                             <p>Online School</p>
                         </div>
                     {% else %}

@@ -11,7 +11,11 @@
                 <img class="avatar" src="{% static 'img/user5.jpg' %}">
                 <h2 class="white-text m-0">{{ author.username }}</h2>
                 <p class="white-text m-0">Blogger / Intermediate / Student.</p>
-                <a class="waves-effect waves-light btn primary-color m-20" href="profile.html">Follow</a>
+                {% if author == request.user %}
+                    <a class="waves-effect waves-light btn primary-color m-20" href="{% url 'profile_edit' %}">Edit</a>
+                {% else %}
+                    <a class="waves-effect waves-light btn primary-color m-20" href="profile.html">Follow</a>
+                {% endif %}
             </div>
         </div>
 
@@ -75,7 +79,7 @@
                         </a>
                         <div class="p-5 grey lighten-4">
                             <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
-                            <blockquote>{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }}) </blockquote>
+                            <blockquote style="margin: 0px 0px">{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }}) </blockquote>
                         </div>
                     </div>
                 {% endfor %}
