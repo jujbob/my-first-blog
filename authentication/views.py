@@ -44,11 +44,18 @@ def profile(request, pk):
 
 @login_required
 def profile_edit(request):
+
+    user = get_object_or_404(Account, pk=request.user.pk)
     if request.method == 'POST':
-        return redirect('profile_edit')
+        form = AccountFormDetail(request.POST, instance=user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.introduction = form.introduction
+            user.save()
+        return redirect('authentication.views.profile', pk=request.user.pk)
 
     elif request.method == 'GET':
-        accountForm = AccountFormDetail()
+        accountForm = AccountFormDetail(instance=request.user)
     return render(request, "blog/profile_edit.html", {'accountForm': accountForm,})
 
 
