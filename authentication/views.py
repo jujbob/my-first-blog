@@ -49,7 +49,8 @@ def profile_edit(request):
 
     elif request.method == 'GET':
         accountForm = AccountFormDetail()
-    return render('blog/profile_edit.html', {'accountForm': accountForm,})
+    return render(request, "blog/profile_edit.html", {'accountForm': accountForm,})
+
 
 def logout_user(request):
     logout(request)

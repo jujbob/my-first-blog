@@ -60,6 +60,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    small_image = models.ImageField(upload_to='image/profile/%Y/%m/%d', null=True)
+    introduction = models.TextField(blank=True)
+    #image_file = models.ImageField(upload_to='image/original/%Y/%m/%d')
 
     objects = AccountManager()
 

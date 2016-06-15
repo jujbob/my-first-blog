@@ -2,7 +2,7 @@
 
 {% block content %}
     <!-- Page Contents -->
-    <div class="page fullscreen valign-wrapper animated fadeinright" xmlns="http://www.w3.org/1999/html">
+    <div class="page fullscreen valign-wrapper animated fadeinright" xmlns="http://www.w3.org/1999/html" style="background-color: white">
 
         <div class="valign center-align w-100">
             <h1 class="m-0"><strong>BuddyLang</strong></h1>
@@ -13,27 +13,68 @@
 
                         <div class="input-field center">
                             <label for="login-psw">Username</label>
-                            <b>{{ form.username.errors|striptags }}</b>
-                            {{ form.username }}
+                            <b>{{ accountForm.username.errors|striptags }}</b>
+                            {{ accountForm.username }}
+                        </div>
+
+                        <div class="input-field center">
+                            <label for="login-psw">Introduction</label>
+                            <b>{{ accountForm.introduction.errors|striptags }}</b>
+                            {{ accountForm.introduction }}
                         </div>
 
                         <div class="input-field center">
                             <label for="login-psw">Password</label>
-                            <b>{{ form.password1.errors|striptags }}</b>
-                            {{ form.password1 }}
+                            <b>{{ accountForm.password1.errors|striptags }}</b>
+                            {{ accountForm.password1 }}
                         </div>
                         <div class="input-field center">
                             <label for="login-psw2">Confirm</label>
-                            <b>{{ form.password2.errors|striptags }}</b>
-                            {{ form.password2 }}
+                            <b>{{ accountForm.password2.errors|striptags }}</b>
+                            {{ accountForm.password2 }}
+                        </div>
+
+                        <div class="input-field">
+                            <label>Profile Image</label>
+                            <b>{{ accountForm.small_image.errors|striptags }}</b>
+                            {{ accountForm.small_image }}
                         </div>
                     </div>
-                    <button type="submit" class="waves-effect waves-light btn-large primary-color block m-20 animated bouncein delay-4">Sign Up</button>
+                    <button type="submit" class="waves-effect waves-light btn-large primary-color block m-20 animated bouncein delay-4">Edit</button>
 
                 </form>
         </div>
     </div>
     <!-- End of Page Contents -->
     </div><!-- End of Main Container -->
+
+
+
+{% comment %}
+
+    <div style="background-color: white">
+        <h1>New post</h1>
+        <form method="POST" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for hidden in postForm.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            <label>Title</label>
+            {{ postForm.title }} <br />
+
+            <label>Text</label>
+            {{ postForm.text }} <br />
+
+                        {{ formset.management_form }}
+            {% for form in formset %}
+                {{ form.image_file }}
+            {% endfor %}
+            <label>Images</label>
+            {{ formset.images }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </div>
+{% endcomment %}
 
 {% endblock %}
