@@ -46,13 +46,16 @@ def profile(request, pk):
 def profile_edit(request):
 
     user = get_object_or_404(Account, pk=request.user.pk)
+    print(user.username)
     if request.method == 'POST':
-        form = AccountFormDetail(request.POST, instance=user)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.introduction = form.introduction
+        accountForm = AccountFormDetail(request.POST, request.FILES, instance=user)
+        if accountForm.is_valid():
+            user = accountForm.save()
             user.save()
-        return redirect('authentication.views.profile', pk=request.user.pk)
+            print("save user")
+            return redirect('authentication.views.profile', pk=request.user.pk)
+        else:
+            return render(request, "blog/profile_edit.html", {'accountForm': accountForm,})
 
     elif request.method == 'GET':
         accountForm = AccountFormDetail(instance=request.user)
