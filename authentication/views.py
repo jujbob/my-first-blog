@@ -2,6 +2,7 @@ from authentication.forms import AccountForm, AccountFormDetail
 from blog.models import Post
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.transaction import commit
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import permissions, viewsets, status
 
@@ -46,12 +47,14 @@ def profile(request, pk):
 def profile_edit(request):
 
     user = get_object_or_404(Account, pk=request.user.pk)
-    print(user.username)
     if request.method == 'POST':
-        accountForm = AccountFormDetail(request.POST, request.FILES, instance=user)
+        accountForm = AccountFormDetail(request.POST, request.FILES, instance=request.user)
         if accountForm.is_valid():
-            user = accountForm.save()
-            user.save()
+            user = accountForm.save(commit=False)
+            if 'small_image' in request.FILES:
+#                user.delete_image()
+                user.small_image = request.FILES['small_image']
+                user.save()
             print("save user")
             return redirect('authentication.views.profile', pk=request.user.pk)
         else:
@@ -60,6 +63,11 @@ def profile_edit(request):
     elif request.method == 'GET':
         accountForm = AccountFormDetail(instance=request.user)
     return render(request, "blog/profile_edit.html", {'accountForm': accountForm,})
+
+
+#    for image in request.FILES.getlist("images", []):
+#        photo = Resource(post=post, image_file=image)
+#        photo.save()
 
 
 def logout_user(request):

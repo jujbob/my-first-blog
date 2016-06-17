@@ -33,7 +33,7 @@
                 <h5 style="margin-bottom: 10px;font-weight: 600"> <blockquote class="primary-border">{{ post.title }} </blockquote></h5>
                 <div class="social-share-author animated fadeinright delay-2">
                     <div>
-                        <img src="{% static 'img/user5.jpg' %}" alt="" class="avatar_left">
+                        <img src="/medias/{{ post.author.small_image }}" alt="" class="avatar_left">
                         <span class="small">
                             {{ post.author.username }}
                             {% if post.author == request.user or request.user.is_staff  %}
@@ -60,7 +60,7 @@
                 <div class="comments grey lighten-4">
                     {% for comment in post.comments.all %}
                         <div class="media-top-object animated fadeinright delay-2">
-                            <img src="{% static 'img/user5.jpg' %}" alt="" class="media-left avatar_left">
+                            <img src="/medias/{{ comment.author.small_image }}" alt="" class="media-left avatar_left">
                             <div class="media-body">
                                 <span class="small"> <b>{{ comment.author.username }}</b>
                                     <div style="float: right">
@@ -78,8 +78,9 @@
                         {% for subComment in comment.subComments.all %} <!-- start point about subComments -->
                             <div class="media-top-object animated fadeinright delay-2">
 
-                                <img src="{% static 'img/reply.gif' %}" alt="" class="media-left reply" >
-                                <img src="{% static 'img/user5.jpg' %}" alt="" class="media-left avatar_left">
+                                <i class="fa fa-angle-double-right" aria-hidden="TRUE"></i>
+{% comment %}                                <img src="{% static 'img/reply.gif' %}" alt="" class="media-left reply" >{% endcomment %}
+                                <img src="/medias/{{ subComment.author.small_image }}" alt="" class="media-left avatar_left">
                                 <div class="media-body">
                                         <span class="small"> <b>{{ subComment.author.username }}</b>
                                             <div style="float: right">

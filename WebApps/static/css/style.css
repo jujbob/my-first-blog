@@ -787,6 +787,7 @@ footer.page-footer .footer-copyright {
     height: 40px;
     border-radius: 2px;
     float: left;
+    margin-right: 5px;
 }
 .reply {
     width: 20px;

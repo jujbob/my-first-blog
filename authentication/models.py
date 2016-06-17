@@ -34,12 +34,16 @@ class AccountManager(BaseUserManager):
 
         return account
 
+#    def delete_image(self, *args, **kwargs):
+#        self.small_image.delete
+#        super(Account, self).delete(*args, **kwargs)
+
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=100, unique=True)
-    username = models.CharField(('username'), max_length=30, unique=True,
+    username = models.CharField(('username'), max_length=30, unique=False,
                                 help_text=('Required. 30 characters or fewer. Letters, digits'
                                             ' and ./+/-/_ only.'),
                                 error_messages={
@@ -77,6 +81,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name
+
+    def delete_image(self, *args, **kwargs):
+        self.small_image.delete()
+#        super(Account, self).delete(*args, **kwargs)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """

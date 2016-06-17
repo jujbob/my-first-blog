@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'blog',
     'authentication',
     'rest_framework',
+    'django_cleanup',
 )
 
 MIDDLEWARE_CLASSES = (

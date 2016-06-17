@@ -19,7 +19,7 @@ class AccountForm(UserCreationForm):
 class AccountFormDetail(UserCreationForm):
     class Meta:
         model = Account
-        fields = ('username', 'small_image', 'introduction', 'password1', 'password2')
+        fields = ('username', 'small_image', 'introduction', 'password1', 'password2', )
 
 
 '''

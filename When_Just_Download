@@ -10,6 +10,7 @@
  - (in linux) pip install djangorestframework
  - (in linux) pip install pygments  # code highlight tool
  - (in linux) pip install pillow  # for modeling ImageFiled (needed --> ape-get install libjpeg-dev python3-dev)
+ - (in linux) pip install django-cleanup #for deleting images when imageFilds are updated
  - (if you have troubles) sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
 
 

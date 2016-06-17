@@ -9,7 +9,7 @@
 
             <div class="card" style="border:1px solid white; border-radius: 5px">
                 <div class="header-hover m-10">
-                    <img class="avatar_left" style="float: left" src="{% static 'img/user5.jpg' %}" alt="">
+                    <img class="avatar_left" style="float: left" src="/medias/{{ post.author.small_image }}" alt="">
                     <div>
                         <a href="/auth/profile/{{ post.author.pk }}"><B>{{ post.author.username }}</B></a>
                         <div style="float: right">
@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="small">
                         {{ post.created_date }}
                     </div>
                 </div>
