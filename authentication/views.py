@@ -54,7 +54,7 @@ def profile_edit(request):
             if 'small_image' in request.FILES:
 #                user.delete_image()
                 user.small_image = request.FILES['small_image']
-                user.save()
+            user.save()
             print("save user")
             return redirect('authentication.views.profile', pk=request.user.pk)
         else:

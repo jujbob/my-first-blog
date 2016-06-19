@@ -33,11 +33,11 @@
                 <h5 style="margin-bottom: 10px;font-weight: 600"> <blockquote class="primary-border">{{ post.title }} </blockquote></h5>
                 <div class="social-share-author animated fadeinright delay-2">
                     <div>
-                        <img src="/medias/{{ post.author.small_image }}" alt="" class="avatar_left">
+                        <a href="/auth/profile/{{ post.author.pk }}"><img src="/medias/{{ post.author.small_image_url }}" alt="" class="avatar_left"></a>
                         <span class="small">
-                            {{ post.author.username }}
+                            <a href="/auth/profile/{{ post.author.pk }}"><B>{{ post.author.username }}</B></a>
                             {% if post.author == request.user or request.user.is_staff  %}
-                                <div style="float: right"><a class="btn-floating" style="text-align: center;" href="{% url 'post_remove' pk=post.pk %}">삭제</a> &nbsp; <a class="btn-floating" style="text-align: center;" href="{% url 'post_edit' pk=post.pk %}">수정</a></div>
+                                <div style="float: right"><a class="btn-floating" style="text-align: center;" href="{% url 'post_remove' pk=post.pk %}">Del</a> &nbsp; <a class="btn-floating" style="text-align: center;" href="{% url 'post_edit' pk=post.pk %}">Edit</a></div>
                             {% endif %}
                             <p style="margin-bottom: 10px">{{ post.created_date }}</p>
                         </span>
@@ -60,14 +60,14 @@
                 <div class="comments grey lighten-4">
                     {% for comment in post.comments.all %}
                         <div class="media-top-object animated fadeinright delay-2">
-                            <img src="/medias/{{ comment.author.small_image }}" alt="" class="media-left avatar_left">
+                            <a href="/auth/profile/{{ comment.author.pk }}"><img src="/medias/{{ comment.author.small_image_url }}" alt="" class="media-left avatar_left"></a>
                             <div class="media-body">
-                                <span class="small"> <b>{{ comment.author.username }}</b>
+                                <span class="small"> <a href="/auth/profile/{{ comment.author.pk }}"><b>{{ comment.author.username }}</b></a>
                                     <div style="float: right">
                                         {% if comment.author == request.user %}
                                             <a class="btn-floating" style="width: 30px;height: 30px;line-height: 30px;border-radius: 10%; text-align: center" href="{% url 'comment_remove' pk=comment.pk %}">삭제</a>
                                         {% endif %}
-                                            <a class="btn-floating" style="width: 30px;height: 30px;line-height: 30px;border-radius: 10%; text-align: center" href="{% url 'add_subComment_to_post' post_pk=post.pk comment_pk=comment.pk %}">리플</a>
+                                            <a class="btn-floating" style="width: 30px;height: 30px;line-height: 30px;border-radius: 10%; text-align: center" href="{% url 'add_subComment_to_post' post_pk=post.pk comment_pk=comment.pk %}">repl</a>
                                     </div>
                                     <p class="small">{{ comment.created_date }}</p>
                                 </span>
@@ -80,9 +80,9 @@
 
                                 <i class="fa fa-angle-double-right" aria-hidden="TRUE"></i>
 {% comment %}                                <img src="{% static 'img/reply.gif' %}" alt="" class="media-left reply" >{% endcomment %}
-                                <img src="/medias/{{ subComment.author.small_image }}" alt="" class="media-left avatar_left">
+                                <a href="/auth/profile/{{ subComment.author.pk }}"><img src="/medias/{{ subComment.author.small_image_url }}" alt="" class="media-left avatar_left"></a>
                                 <div class="media-body">
-                                        <span class="small"> <b>{{ subComment.author.username }}</b>
+                                        <span class="small"> <a href="/auth/profile/{{ subComment.author.pk }}"><b>{{ subComment.author.username }}</b></a>
                                             <div style="float: right">
                                                 {% if subComment.author == request.user %}
                                                     <a class="btn-floating" style="width: 30px;height: 30px;line-height: 30px;border-radius: 10%; text-align: center" href="{% url 'subComment_remove' pk=subComment.pk %}">삭제</a>
@@ -98,14 +98,17 @@
                     {% empty %}
                         <span>No comments here yet :(</span>
                     {% endfor %}
-                    <div style="width: 100%">
+                    <div>
                         <form method="POST" action="{% url 'add_comment_to_post' post.id %}">
                             {% csrf_token %}
                             <input type="hidden" id="pk" value="{{ post.id }}" />
-                            <div>
-                                <div style="width: 85%; float: left;">{{ form.text }} </div>
-                                <div style="float: right;width: 14%"><button class="btn-floating" style="width: 100%; height: 3rem;border-radius: 1%; text-align: center" href="#">리플</button></div>
-                            </div>
+                            {% if user.is_authenticated %}
+                            <img src="/medias/{{ user.small_image_url }}" alt="" class="media-left avatar_small">
+                            {% else %}
+                            <img src="/medias/image/profile/default_profile.jpg" alt="" class="media-left avatar_small">
+                            {% endif %}
+                            <div style="width: 80%; float: left;">{{ form.text }}</div>
+                            <div style="float: right;width: 9%"><button class="btn-floating small" style="width: 100%; height: 3rem;border-radius: 1%; text-align: center" href="#">POST</button></div>
                         </form>
                     </div>
                 </div>

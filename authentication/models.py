@@ -64,7 +64,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    small_image = models.ImageField(upload_to='image/profile/%Y/%m/%d', blank=True)
+    small_image = models.ImageField(upload_to='image/profile/%Y/%m/%d', blank=True,)
     introduction = models.TextField(blank=True)
     #image_file = models.ImageField(upload_to='image/original/%Y/%m/%d')
 
@@ -81,6 +81,14 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name
+
+    @property
+    def small_image_url(self):
+        # Pseudocode:
+        if self.small_image:
+            return self.small_image
+        else:
+            return "image/profile/default_profile.jpg"
 
     def delete_image(self, *args, **kwargs):
         self.small_image.delete()

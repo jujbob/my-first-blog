@@ -8,4 +8,5 @@ db.sqlite3
 media
 .media
 .idea/workspace.*
+!WebApps/media/profile/default_profile.jpg
 WebApps/media/*

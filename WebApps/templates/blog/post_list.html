@@ -9,7 +9,7 @@
 
             <div class="card" style="border:1px solid white; border-radius: 5px">
                 <div class="header-hover m-10">
-                    <img class="avatar_left" style="float: left" src="/medias/{{ post.author.small_image }}" alt="">
+                    <a href="/auth/profile/{{ post.author.pk }}"><img class="avatar_left" style="float: left" src="/medias/{{ post.author.small_image_url }}" alt=""></a>
                     <div>
                         <a href="/auth/profile/{{ post.author.pk }}"><B>{{ post.author.username }}</B></a>
                         <div style="float: right">
@@ -34,8 +34,9 @@
                 </div>
                 </a>
                 <div class="p-5 grey lighten-4">
-                    <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5></a>
+                    <a href="{% url 'post_detail' pk=post.pk %}"><h5 style="margin-bottom: 10px;font-weight: 600">{{ post.title }}</h5>
                     <blockquote style="margin: 0px 0px">{{ post.text }} &nbsp &nbsp &nbsp         Comments: ({{ post.comments.count }}) </blockquote>
+                    </a>
                 </div>
             </div>
         {% endfor %}

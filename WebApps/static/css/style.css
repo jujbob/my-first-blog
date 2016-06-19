@@ -789,6 +789,13 @@ footer.page-footer .footer-copyright {
     float: left;
     margin-right: 5px;
 }
+.avatar_small {
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    float: left;
+    margin-right: 5px;
+}
 .reply {
     width: 20px;
     height: 20px;
