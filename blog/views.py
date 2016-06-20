@@ -1,5 +1,7 @@
 
 # coding: utf-8
+import PIL
+from PIL.Image import Image
 from django.core.checks import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.forms import modelformset_factory
@@ -50,6 +52,16 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post, 'form': form})
 
 
+def image_resizing(image):
+
+    basewidth = 70
+    wpercent = (basewidth / float(image.size[0]))
+    hsize = int((float(image.size[1]) * float(wpercent)))
+    image = image.resize((basewidth, hsize), PIL.Image.ANTIALIAS)
+
+    return image
+
+
 @login_required
 def post_new(request):
 
@@ -63,6 +75,7 @@ def post_new(request):
             post.author = request.user
             post.save()
             for image in request.FILES.getlist("images", []):
+#                image = image_resizing(image)
                 photo = Resource(post=post, image_file=image)
                 photo.save()
             return redirect('blog.views.post_detail', pk=post.pk)
@@ -248,6 +261,9 @@ def resource_new(request):
 
 def resource_edit(request, pk):
     return HttpResponse("notting")
+
+
+
 
 
 
