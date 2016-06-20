@@ -19,9 +19,9 @@ class Post(models.Model):
 
 class Resource(models.Model):
     post = models.ForeignKey('blog.Post', related_name='resources')
-    image_file = models.ImageField(upload_to='image/original/%Y/%m/%d')
-    filtered_image_file = models.ImageField(null=True, upload_to='image/filtered/%Y/%m/%d')
-    movie_file = models.FileField(null=True, upload_to='movie/%Y/%m/%d')
+    image_file = models.ImageField(upload_to='image/post/original/%Y/%m/%d')
+    filtered_image_file = models.ImageField(null=True, upload_to='image/post/filtered/%Y/%m/%d')
+    movie_file = models.FileField(null=True, upload_to='movie/post/%Y/%m/%d')
     external_url = models.TextField(max_length=1024, blank=True)
     created_date = models.DateTimeField(auto_now_add=True, auto_now=False)
 

@@ -5,8 +5,6 @@ env
 db.sqlite3
 .DS_Store
 .idea
-media
-.media
 .idea/workspace.*
-!WebApps/media/profile/default_profile.jpg
-WebApps/media/*
+WebApps/media/post/*
+WebApps/media/profile/20*
