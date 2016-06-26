@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'authentication',
     'rest_framework',
     'django_cleanup',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (

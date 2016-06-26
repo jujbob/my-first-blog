@@ -1,7 +1,9 @@
+from sorl.thumbnail import get_thumbnail
+from sorl.thumbnail import delete
 from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.utils import timezone
-from mysite import settings
+
 
 class Post(models.Model):
     author = models.ForeignKey('authentication.Account')
@@ -34,6 +36,10 @@ class Resource(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('resource_detail', kwargs={'pk': self.id})
 
+    def save(self, *args, **kwargs):
+        if self.image_file:
+            self.image_file = get_thumbnail(self.image_file, '100x100', quality=85, format='JPEG')g
+            super(Resource, self).save(*args, **kwargs)
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
