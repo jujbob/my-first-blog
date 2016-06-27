@@ -1,3 +1,4 @@
+from django.core.files.base import ContentFile
 from sorl.thumbnail import get_thumbnail
 from sorl.thumbnail import delete
 from django.core.urlresolvers import reverse_lazy
@@ -37,9 +38,14 @@ class Resource(models.Model):
         return reverse_lazy('resource_detail', kwargs={'pk': self.id})
 
     def save(self, *args, **kwargs):
-        if self.image_file:
-            self.image_file = get_thumbnail(self.image_file, '100x100', quality=85, format='JPEG')g
+        if not self.id:
             super(Resource, self).save(*args, **kwargs)
+            resized = get_thumbnail(self.image_file, "100x100", quality=85, format='JPEG')
+            self.image_file.save(resized.name, ContentFile(resized.read()), True)
+        super(Resource, self).save(*args, **kwargs)
+
+#            self.image_file = get_thumbnail(self.image_file, '100x100', quality=85, format='JPEG')
+            #super(Resource, self).save(*args, **kwargs)
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
