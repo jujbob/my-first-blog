@@ -40,7 +40,14 @@ class Resource(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             super(Resource, self).save(*args, **kwargs)
-            resized = get_thumbnail(self.image_file, "100x100", quality=85, format='JPEG')
+            standard_width = 600
+            standard_height = 300
+            weight_width = (standard_width / float(self.image_file.width))
+            result_width = standard_width
+            result_height = int(float(self.image_file.height) * float(weight_width))
+            result_size = str(result_width)+'x'+str(result_height)
+
+            resized = get_thumbnail(self.image_file, result_size, quality=85, format='JPEG')
             self.image_file.save(resized.name, ContentFile(resized.read()), True)
         super(Resource, self).save(*args, **kwargs)
 
