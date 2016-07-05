@@ -52,13 +52,13 @@ var swiper = new Swiper('.slider', {
     paginationClickable: true,
     nextButton: '.swiper-button-next',
     prevButton: '.swiper-button-prev',
-    autoplay: 5000,
+/*    autoplay: 5000,*/
     loop: true
 });
 var swiper = new Swiper('.slider-sliced', {
     pagination: '.swiper-pagination',
     paginationClickable: true,
-    autoplay: 5000,
+/*    autoplay: 5000,*/
 });
 var swiper = new Swiper('.steps', {
     pagination: '.swiper-pagination',
@@ -74,7 +74,7 @@ var swiper = new Swiper('.slider-drawer', {
 var swiper = new Swiper('.slider-vertical', {
     pagination: '.swiper-pagination',
     paginationClickable: true,
-    autoplay: 5000,
+/*    autoplay: 5000,*/
     direction: 'vertical'
 });
 

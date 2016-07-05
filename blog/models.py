@@ -40,19 +40,38 @@ class Resource(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             super(Resource, self).save(*args, **kwargs)
-            standard_width = 600
-            standard_height = 300
-            weight_width = (standard_width / float(self.image_file.width))
-            result_width = standard_width
-            result_height = int(float(self.image_file.height) * float(weight_width))
-            result_size = str(result_width)+'x'+str(result_height)
+            standard_width = 618
+            standard_height = 348
 
+            # When a image is smaller than standard image both width and height --> don't do resizing
+            if standard_width > self.image_file.width and standard_height > self.image_file.height:
+                result_width = self.image_file.width
+                result_height = self.image_file.height
+            # When a image's width and height is same or width is bigger than height  --> resizing based on width
+            elif self.image_file.width >= self.image_file.height:
+                weight_width = (standard_width / float(self.image_file.width))
+                result_width = standard_width
+                result_height = int(float(self.image_file.height) * float(weight_width))
+            # When a image's height is bigger than width --> fix ratio of the image based on height
+            elif self.image_file.height > self.image_file.width:
+                weight_height = (standard_height / float(self.image_file.height))
+                result_height = standard_height
+                result_width = int(float(self.image_file.width) * float(weight_height))
+            else:
+                NotImplementedError
+
+            result_size = str(result_width)+'x'+str(result_height)
             resized = get_thumbnail(self.image_file, result_size, quality=85, format='JPEG')
             self.image_file.save(resized.name, ContentFile(resized.read()), True)
         super(Resource, self).save(*args, **kwargs)
 
-#            self.image_file = get_thumbnail(self.image_file, '100x100', quality=85, format='JPEG')
-            #super(Resource, self).save(*args, **kwargs)
+    def image_resizing(self, standard_width, standard_height):
+
+        size = [0, 0]
+
+        return size
+
+
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')

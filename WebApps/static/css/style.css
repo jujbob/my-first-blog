@@ -325,7 +325,7 @@ h1.title.big {
 }
 .opacity-overlay-top {
     opacity: 0.7;
-    position: absolute;
+/*    position: absolute;*/
     top: 0;
     right: 0;
     bottom: 0;

@@ -22,12 +22,14 @@
                     <div class="swiper-wrapper" style="margin: auto;" >
                         {% for resource in post.resources.all %}
                             <div class="swiper-slide">
-                                <img src="/medias/{{ resource.image_file }}" alt="">
+                                <img style=" width: auto; margin: 0 auto;" src="/medias/{{ resource.image_file }}" alt="">
                             </div>
                         {% endfor %}
                     </div>
                     <!-- Add Pagination -->
                     <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
                 <!-- End of Slider -->
                 <h5 style="margin-bottom: 10px;font-weight: 600"> <blockquote class="primary-border">{{ post.title }} </blockquote></h5>

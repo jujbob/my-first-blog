@@ -68,9 +68,9 @@
                             </div>
                         </div>
                         <a href="{% url 'post_detail' pk=post.pk %}">
-                            <div class="image m-10">
+                            <div class="image m-10 center" >
                                 {% if post.resources.first.image_file %}
-                                    <img src="/medias/{{ post.resources.first.image_file }}" alt="">
+                                    <img style="width: auto; margin: 0 auto;" src="/medias/{{ post.resources.first.image_file }}" alt="">
                                     <div class="opacity-overlay-top"></div>
                                 {% else %}
 
