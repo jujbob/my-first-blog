@@ -2,8 +2,10 @@
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core import validators
+from django.core.files.base import ContentFile
 from django.core.mail import send_mail
 from django.db import models
+from sorl.thumbnail import get_thumbnail
 
 
 class AccountManager(BaseUserManager):
@@ -89,6 +91,16 @@ class Account(AbstractBaseUser, PermissionsMixin):
             return self.small_image
         else:
             return "image/profile/default_profile.jpg"
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            super(Account, self).save(*args, **kwargs)
+            standard_width = 100
+            standard_height = 100
+            result_size = str(standard_width)+'x'+str(standard_height)
+            resized = get_thumbnail(self.image_file, result_size, quality=90, format='JPEG')
+            self.image_file.save(resized.name, ContentFile(resized.read()), True)
+        super(Account, self).save(*args, **kwargs)
 
     def delete_image(self, *args, **kwargs):
         self.small_image.delete()

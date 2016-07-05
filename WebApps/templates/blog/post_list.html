@@ -7,7 +7,7 @@
 
         {% for post in posts %}
 
-            <div class="card" style="border:1px solid white; border-radius: 5px">
+            <div class="card" style="border:1px solid white; border-radius: 1px">
                 <div class="header-hover m-10">
                     <a href="/auth/profile/{{ post.author.pk }}"><img class="avatar_left" style="float: left" src="/medias/{{ post.author.small_image_url }}" alt=""></a>
                     <div>
@@ -26,7 +26,7 @@
                 <a href="{% url 'post_detail' pk=post.pk %}">
                 <div class="image m-10">
                     {% if post.resources.first.image_file %}
-                        <img style="width: auto; margin: 0 auto;" src="/medias/{{ post.resources.first.image_file }}" alt="">
+                        <img class="content-image" src="/medias/{{ post.resources.first.image_file }}" alt="">
                         <div class="opacity-overlay-top"></div>
                     {% else %}
 

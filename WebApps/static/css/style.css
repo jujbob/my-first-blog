@@ -1201,10 +1201,11 @@ textarea.materialize-textarea {
 
 /* Card */
 .card {
-  margin: 0 0 1rem 0;
-  border-radius: 0;
-  box-shadow: none;
-  overflow: auto;
+    margin: 0 0 1rem 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: auto;
+    border: 1px solid rgba(0, 0, 0, .1);
 }
 .card .media-top-object {
   padding: 1rem;
@@ -1245,6 +1246,12 @@ textarea.materialize-textarea {
 }
 .card .image {
   position: relative;
+}
+.card .content-image {
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, .1);
 }
 
 /* Gallery Card */
