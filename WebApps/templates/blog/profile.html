@@ -70,7 +70,7 @@
                         <a href="{% url 'post_detail' pk=post.pk %}">
                             <div class="image m-10 center" >
                                 {% if post.resources.first.image_file %}
-                                    <img class="content-image" src="/medias/{{ post.resources.first.image_file }}" alt="">
+                                    <img class="content-image" src="/medias/{{ post.resources.first.image_file }}" alt="" style="max-width: {{ post.resources.first.image_file.width }}px">
                                     <div class="opacity-overlay-top"></div>
                                 {% else %}
 
