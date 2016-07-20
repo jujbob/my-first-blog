@@ -15,6 +15,12 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'text',)
 
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+    #    self.fields["text"].widget = forms.FileInput(attrs={"name": "images", "multiple": "multiple"})
+        self.fields["title"].widget = forms.TextInput(attrs={"id": "title"})
+        self.fields["text"].widget = forms.Textarea(attrs={"class": "postText", "placeholder": "Insert Content"})
+
 class PostResourceForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -39,4 +45,4 @@ class ResourceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ResourceForm, self).__init__(*args, **kwargs)
-        self.fields["images"].widget = forms.FileInput(attrs={"name": "images", "multiple": "multiple"})
+        self.fields["images"].widget = forms.FileInput(attrs={"name": "images", "multiple": "multiple", "placeholder": "Input Images"})

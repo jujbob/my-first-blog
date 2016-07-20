@@ -16,12 +16,14 @@
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{% static 'css/keyframes.css' %}">
     <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/keyframes.css' %}">
     <link rel="stylesheet" href="{% static 'css/swiper.css' %}">
-    <link rel="stylesheet" href="{% static 'css/swipebox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swipebox.min.css' %}">{% comment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">{% endcomment %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
 
 </head>
 
@@ -70,7 +72,7 @@
                     {% endif %}
 
 
-{% comment %}                    <img class="circle avatar" src="{% static 'img/user5.jpg' %}" alt="">
+                    {% comment %}                    <img class="circle avatar" src="{% static 'img/user5.jpg' %}" alt="">
                     <div class="avatar-body">
                         <h3>BuddyLang</h3>
                         <p>Online School</p>
@@ -216,7 +218,7 @@
                 <a class="title" href="{% url 'logout_user' %}">{{ user.username }}<small>(Logout)</small></a>
             {% else %}
                 <a class="title" href={% url "base_login" %}>login</a>
- <!--               <a href="/" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> -->
+                <!--               <a href="/" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> -->
             {% endif %}
 
             <!--            <div class="title"> <a href={% url "login_view" %}>login</a></div>
@@ -229,8 +231,8 @@
     </div>
     <!-- End of Toolbar -->
     <!-- Start Content -->
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
     <!-- End of Content -->
     <footer class="page-footer primary-color">
         <div class="container">

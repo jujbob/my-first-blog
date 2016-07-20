@@ -1966,3 +1966,22 @@ ul.faq {
 .feature h3 {
   margin-bottom: 5px;
 }
+
+/* Start KyungTae Lim's style */
+
+.labelFont {
+
+    font-size: 20px;
+    align-items: center;
+}
+
+.postTitle {
+
+    border-top: 1px solid #9e9e9e;
+}
+
+.postText {
+
+    border-top: 1px solid #9e9e9e;
+    height: 200px;
+}
