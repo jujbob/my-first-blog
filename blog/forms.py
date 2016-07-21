@@ -18,7 +18,7 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
     #    self.fields["text"].widget = forms.FileInput(attrs={"name": "images", "multiple": "multiple"})
-        self.fields["title"].widget = forms.TextInput(attrs={"id": "title"})
+        self.fields["title"].widget = forms.TextInput(attrs={"id": "title", "style": "height: 40px; margin-bottom: 20px"})
         self.fields["text"].widget = forms.Textarea(attrs={"class": "postText", "placeholder": "Insert Content"})
 
 class PostResourceForm(forms.ModelForm):

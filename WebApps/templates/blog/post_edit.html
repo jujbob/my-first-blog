@@ -3,46 +3,38 @@
 {% block content %}
 
     <div style="background-color: white">
-        <h1>New post</h1>
+        <h1>New Post</h1>
         <form method="POST" class="post-form" enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in postForm.hidden_fields %}
                 {{ hidden }}
             {% endfor %}
 
-            <div style="">
-
-                <div style="width: 90%; margin: 0 auto;" class="input-field col s12">
-                    <img style="float: left;" class="circle avatar" src="/medias/{{ user.small_image_url }}"> &nbsp;&nbsp;
-                    <div style="float: left; width: 80%; margin: 0 auto;" {% comment %}style=""{% endcomment %} class="input-field col s12">
-                        {{ postForm.title }}
-                        <label for="title">Title</label>
-                    </div>
+            <div style="width: 90%; max-width: 576px; margin: 0 auto;" class="input-field col s12">
+                <img style="float: left; margin-right: 8px; border-radius: 0px; border: 1px solid #9e9e9e" class="circle avatar"  src="/medias/{{ user.small_image_url }}"> &nbsp;&nbsp;
+                <div style="float: left; width: 80%; margin: 0 auto;" class="input-field col s12">
+                   <div style="margin: 0 auto;" >{{ postForm.title }}</div>
+                    <label for="title">Title</label>
                 </div>
-
-                <div style="width: 90%; margin: 0 auto; ">
-                    {{ postForm.text }} <br />
-                </div>
-
-
-                {% comment %}            {{ formset.management_form }}
-                {% for form in formset %}
-                    {{ form.image_file }}
-                {% endfor %}{% endcomment %}
-
-                <div style="width: 90%; margin: 0 auto;">
-                    <label class="labelFont">Images</label>
-                    {{ formset.images }}
-                    <button style="float: right" type="submit" class="save btn-danger">Save</button>
-                </div>
-
-{% comment %}
-                <div class="list-group">
-                    <a class="list-group-item" href="#"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
-                </div>
-{% endcomment %}
-
             </div>
+
+            <div style="width: 90%; margin: 0 auto; ">
+                {{ postForm.text }} <br />
+            </div>
+
+
+            {% comment %}            {{ formset.management_form }}
+            {% for form in formset %}
+                {{ form.image_file }}
+            {% endfor %}{% endcomment %}
+
+            <div style="width: 90%; margin: 0 auto;">
+                <label class="labelFont">IMAGES</label>
+                {{ formset.images }}
+                <button style="float: right" type="submit" class="save btn-danger">Save</button>
+            </div>
+            <div style="width: 90%; margin: 0 auto; height: 40px"></div>
+
         </form>
     </div>
 {% endblock %}
