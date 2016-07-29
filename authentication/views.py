@@ -1,4 +1,4 @@
-from authentication.forms import AccountForm, AccountFormDetail
+from authentication.forms import AccountForm, AccountFormDetail, UserImageForm
 from blog.models import Post
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -6,7 +6,7 @@ from django.db.transaction import commit
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import permissions, viewsets, status
 
-from authentication.models import Account
+from authentication.models import Account, UserImage
 from authentication.permissions import IsAccountOwner
 from authentication.serializers import AccountSerializer
 from rest_framework.response import Response
@@ -48,21 +48,26 @@ def profile_edit(request):
 
     user = get_object_or_404(Account, pk=request.user.pk)
     if request.method == 'POST':
-        accountForm = AccountFormDetail(request.POST, request.FILES, instance=request.user)
-        if accountForm.is_valid():
+        accountForm = AccountFormDetail(request.POST, instance=request.user)
+        userImageForm = UserImageForm(request.POST, request.FILES)
+        if accountForm.is_valid() and userImageForm.is_valid():
             user = accountForm.save(commit=False)
-            if 'small_image' in request.FILES:
-#                user.delete_image()
-                user.small_image = request.FILES['small_image']
+            userImage = userImageForm.save(commit=False)
             user.save()
+            if 'user_image' in request.FILES:
+                userImage.user_image = request.FILES['user_image']
+                userImage.user = request.user
+                userImage.save()
+#                photo = UserImage(user=user, image_file=request.FILES['user_image'])
             print("save user")
             return redirect('authentication.views.profile', pk=request.user.pk)
         else:
-            return render(request, "blog/profile_edit.html", {'accountForm': accountForm,})
+            return render(request, "blog/profile_edit.html", {'accountForm': accountForm, 'userImageFrom': userImageForm, })
 
     elif request.method == 'GET':
         accountForm = AccountFormDetail(instance=request.user)
-    return render(request, "blog/profile_edit.html", {'accountForm': accountForm,})
+        userImageForm = UserImageForm(request.POST, request.FILES)
+    return render(request, "blog/profile_edit.html", {'accountForm': accountForm, 'userImageFrom': userImageForm, })
 
 
 #    for image in request.FILES.getlist("images", []):

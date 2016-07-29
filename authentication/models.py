@@ -90,24 +90,42 @@ class Account(AbstractBaseUser, PermissionsMixin):
         if self.small_image:
             return self.small_image
         else:
-            return "image/profile/default_profile.jpg"
+           return "image/profile/default_profile.jpg"
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            super(Account, self).save(*args, **kwargs)
-            standard_width = 100
-            standard_height = 100
-            result_size = str(standard_width)+'x'+str(standard_height)
-            resized = get_thumbnail(self.image_file, result_size, quality=90, format='JPEG')
-            self.image_file.save(resized.name, ContentFile(resized.read()), True)
+
+#        if self.small_image:
+#            print("Get in")
+#            super(Account, self).save(*args, **kwargs)
+#            standard_width = 100
+#            standard_height = 100
+#            result_size = str(standard_width)+'x'+str(standard_height)
+#            resized = get_thumbnail(self.small_image, result_size, quality=90, format='JPEG')
+#            self.small_image.save(resized.name, ContentFile(resized.read()), True)
         super(Account, self).save(*args, **kwargs)
 
     def delete_image(self, *args, **kwargs):
         self.small_image.delete()
-#        super(Account, self).delete(*args, **kwargs)
+        super(Account, self).delete(*args, **kwargs)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+class UserImage(models.Model):
+
+    user = models.ForeignKey('authentication.Account', related_name='user_image')
+    user_image = models.ImageField(upload_to='image/profile/%Y/%m/%d', blank=True,)
+
+    def save(self, *args, **kwargs):
+
+        if self.id:
+            super(UserImage, self).save(*args, **kwargs)
+            standard_width = 100
+            standard_height = 100
+            result_size = str(standard_width)+'x'+str(standard_height)
+            resized = get_thumbnail(self.user_image, result_size, quality=90, format='JPEG')
+            self.user_image.save(resized.name, ContentFile(resized.read()), True)
+        super(UserImage, self).save(*args, **kwargs)

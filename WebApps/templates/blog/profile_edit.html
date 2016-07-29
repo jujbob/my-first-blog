@@ -45,10 +45,15 @@
                             {{ accountForm.password2 }}
                         </div>
 
-                        <div class="input-field">
+{% comment %}                        <div class="input-field">
                             <label>Profile Image</label>
                             <b>{{ accountForm.small_image.errors|striptags }}</b>
                             {{ accountForm.small_image }}
+                        </div>{% endcomment %}
+                        <div class="input-field">
+                            <label>User Image</label>
+                            <b>{{ userImageFrom.user_image.errors|striptags }}</b>
+                            {{ userImageFrom.user_image }}
                         </div>
                     </div>
                     <button type="submit" class="waves-effect waves-light btn-large primary-color block m-20 animated bouncein delay-4">Edit</button>

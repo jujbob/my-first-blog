@@ -2,7 +2,7 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
-from authentication.models import Account
+from authentication.models import Account, UserImage
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -20,6 +20,30 @@ class AccountFormDetail(UserCreationForm):
     class Meta:
         model = Account
         fields = ('username', 'small_image', 'introduction', 'password1', 'password2', )
+
+class UserImageForm(forms.ModelForm):
+    class Meta:
+        model = UserImage
+        fields = ('user_image',)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 '''
