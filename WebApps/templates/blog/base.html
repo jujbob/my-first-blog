@@ -58,7 +58,7 @@
                 <!-- Avatar -->
                 <div class="nav-avatar">
                     {% if user.is_authenticated %}
-                        <img class="circle avatar" src="/medias/{{ user.small_image_url }}" alt="">
+                        <img class="circle avatar" src="/medias/{{ user.user_image_url }}" alt="">
                         <div class="avatar-body">
                             <a class="title" href="{% url 'profile_detail' pk=user.pk %}"> <h3>{{ user.username }}</h3></a>
                             <p>Online School</p>

@@ -92,6 +92,15 @@ class Account(AbstractBaseUser, PermissionsMixin):
         else:
            return "image/profile/default_profile.jpg"
 
+
+    @property
+    def user_image_url(self):
+        # Pseudocode:
+        if self.user_image:
+            return self.user_image.last().user_image
+        else:
+            return "image/profile/default_profile.jpg"
+
     def save(self, *args, **kwargs):
 
 #        if self.small_image:
@@ -121,10 +130,10 @@ class UserImage(models.Model):
 
     def save(self, *args, **kwargs):
 
-        if self.id:
+        if not self.id:
             super(UserImage, self).save(*args, **kwargs)
-            standard_width = 100
-            standard_height = 100
+            standard_width = 500
+            standard_height = 500
             result_size = str(standard_width)+'x'+str(standard_height)
             resized = get_thumbnail(self.user_image, result_size, quality=90, format='JPEG')
             self.user_image.save(resized.name, ContentFile(resized.read()), True)

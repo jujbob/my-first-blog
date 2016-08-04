@@ -8,7 +8,7 @@
         <!-- Hero Header -->
         <div class="hero-header hero-big bg-v-4">
             <div class="about animated fadeinright delay-1">
-                <img class="avatar" src="/medias/{{ author.small_image_url }}">
+                <img class="avatar" src="/medias/{{ author.user_image_url }}">
                 <h2 class="white-text m-0">{{ author.username }}</h2>
                 <p class="white-text m-0">Blogger / Intermediate / Student.</p>
                 {% if author == request.user %}
@@ -53,7 +53,7 @@
 
                     <div class="card" style="border:1px solid white; border-radius: 5px">
                         <div class="header-hover m-10">
-                            <img class="avatar_left" style="float: left" src="/medias/{{ author.small_image_url }}" alt="">
+                            <img class="avatar_left" style="float: left" src="/medias/{{ author.user_image_url }}" alt="">
                             <div>
                                 <B>{{ post.author.username }}</B>
                                 <div style="float: right">
