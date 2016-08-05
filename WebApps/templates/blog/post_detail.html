@@ -35,7 +35,7 @@
                 <h5 style="margin-bottom: 10px;font-weight: 600"> <blockquote class="primary-border">{{ post.title }} </blockquote></h5>
                 <div class="social-share-author animated fadeinright delay-2">
                     <div>
-                        <a href="/auth/profile/{{ post.author.pk }}"><img src="/medias/{{ post.author.small_image_url }}" alt="" class="avatar_left"></a>
+                        <a href="/auth/profile/{{ post.author.pk }}"><img src="/medias/{{ post.author.user_image_url }}" alt="" class="avatar_left"></a>
                         <span class="small">
                             <a href="/auth/profile/{{ post.author.pk }}"><B>{{ post.author.username }}</B></a>
                             {% if post.author == request.user or request.user.is_staff  %}
@@ -62,7 +62,7 @@
                 <div class="comments grey lighten-4">
                     {% for comment in post.comments.all %}
                         <div class="media-top-object animated fadeinright delay-2">
-                            <a href="/auth/profile/{{ comment.author.pk }}"><img src="/medias/{{ comment.author.small_image_url }}" alt="" class="media-left avatar_left"></a>
+                            <a href="/auth/profile/{{ comment.author.pk }}"><img src="/medias/{{ comment.author.user_image_url }}" alt="" class="media-left avatar_left"></a>
                             <div class="media-body">
                                 <span class="small"> <a href="/auth/profile/{{ comment.author.pk }}"><b>{{ comment.author.username }}</b></a>
                                     <div style="float: right">
@@ -82,7 +82,7 @@
 
                                 <i class="fa fa-angle-double-right" aria-hidden="TRUE"></i>
 {% comment %}                                <img src="{% static 'img/reply.gif' %}" alt="" class="media-left reply" >{% endcomment %}
-                                <a href="/auth/profile/{{ subComment.author.pk }}"><img src="/medias/{{ subComment.author.small_image_url }}" alt="" class="media-left avatar_left"></a>
+                                <a href="/auth/profile/{{ subComment.author.pk }}"><img src="/medias/{{ subComment.author.user_image_url }}" alt="" class="media-left avatar_left"></a>
                                 <div class="media-body">
                                         <span class="small"> <a href="/auth/profile/{{ subComment.author.pk }}"><b>{{ subComment.author.username }}</b></a>
                                             <div style="float: right">
@@ -105,7 +105,7 @@
                             {% csrf_token %}
                             <input type="hidden" id="pk" value="{{ post.id }}" />
                             {% if user.is_authenticated %}
-                            <img src="/medias/{{ user.small_image_url }}" alt="" class="media-left avatar_small">
+                            <img src="/medias/{{ user.user_image_url }}" alt="" class="media-left avatar_small">
                             {% else %}
                             <img src="/medias/image/profile/default_profile.jpg" alt="" class="media-left avatar_small">
                             {% endif %}

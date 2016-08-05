@@ -65,12 +65,6 @@ class Resource(models.Model):
             self.image_file.save(resized.name, ContentFile(resized.read()), True)
         super(Resource, self).save(*args, **kwargs)
 
-    def image_resizing(self, standard_width, standard_height):
-
-        size = [0, 0]
-
-        return size
-
 
 
 class Comment(models.Model):

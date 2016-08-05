@@ -36,9 +36,6 @@ class AccountManager(BaseUserManager):
 
         return account
 
-#    def delete_image(self, *args, **kwargs):
-#        self.small_image.delete
-#        super(Account, self).delete(*args, **kwargs)
 
 
 
@@ -66,7 +63,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    small_image = models.ImageField(upload_to='image/profile/%Y/%m/%d', blank=True,)
     introduction = models.TextField(blank=True)
     #image_file = models.ImageField(upload_to='image/original/%Y/%m/%d')
 
@@ -85,37 +81,14 @@ class Account(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
     @property
-    def small_image_url(self):
-        # Pseudocode:
-        if self.small_image:
-            return self.small_image
-        else:
-           return "image/profile/default_profile.jpg"
-
-
-    @property
     def user_image_url(self):
         # Pseudocode:
-        if self.user_image:
+
+        if self.user_image.count() >= 1:
             return self.user_image.last().user_image
         else:
             return "image/profile/default_profile.jpg"
 
-    def save(self, *args, **kwargs):
-
-#        if self.small_image:
-#            print("Get in")
-#            super(Account, self).save(*args, **kwargs)
-#            standard_width = 100
-#            standard_height = 100
-#            result_size = str(standard_width)+'x'+str(standard_height)
-#            resized = get_thumbnail(self.small_image, result_size, quality=90, format='JPEG')
-#            self.small_image.save(resized.name, ContentFile(resized.read()), True)
-        super(Account, self).save(*args, **kwargs)
-
-    def delete_image(self, *args, **kwargs):
-        self.small_image.delete()
-        super(Account, self).delete(*args, **kwargs)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """
@@ -138,3 +111,8 @@ class UserImage(models.Model):
             resized = get_thumbnail(self.user_image, result_size, quality=90, format='JPEG')
             self.user_image.save(resized.name, ContentFile(resized.read()), True)
         super(UserImage, self).save(*args, **kwargs)
+
+
+    def delete(self, *args, **kwargs):
+        self.user_image.delete()
+        super(UserImage, self).delete(*args, **kwargs)
