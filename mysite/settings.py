@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_cleanup',
     'sorl.thumbnail',
+    'ckeditor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -126,3 +127,26 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'authentication.Account'
 
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+#CKEDITOR_CONFIGS = {
+#    'awesome_ckeditor': {
+#        'toolbar': 'Basic',
+#        'width': '100%',
+#        'display': 'inline',
+#    },
+#}
+
+CKEDITOR_CONFIGS = {
+    'default': {
+       'toolbar': 'Custom',
+        'height': 300,
+        'width': '100%',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ]
+     },
+}

@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from authentication.models import Account, UserImage
+from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -17,6 +18,8 @@ class AccountForm(UserCreationForm):
         fields = ('email', 'username', 'password1', 'password2', )
 
 class AccountFormDetail(UserCreationForm):
+#    content = forms.CharField(widget=CKEditorWidget(config_name='awesome_ckeditor'))
+    content = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Account
         fields = ('username', 'introduction', 'password1', 'password2', )

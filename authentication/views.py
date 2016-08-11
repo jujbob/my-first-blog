@@ -49,6 +49,11 @@ def profile_edit(request):
     user = get_object_or_404(Account, pk=request.user.pk)
     if request.method == 'POST':
         accountForm = AccountFormDetail(request.POST, instance=request.user)
+        print(accountForm.content)
+        print(accountForm.content)
+        print(accountForm.content)
+        print(accountForm.content)
+        print(accountForm.content)
         userImageForm = UserImageForm(request.POST, request.FILES)
         if accountForm.is_valid() and userImageForm.is_valid():
             user = accountForm.save(commit=False)

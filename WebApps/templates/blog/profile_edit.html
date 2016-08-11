@@ -20,8 +20,8 @@
 
                 <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                    {{ accountForm.media }}
                     <div class="p-20">
-
                         <div class="input-field center">
                             <label for="login-psw">Username</label>
                             <b>{{ accountForm.username.errors|striptags }}</b>
@@ -43,6 +43,11 @@
                             <label for="login-psw2">Confirm</label>
                             <b>{{ accountForm.password2.errors|striptags }}</b>
                             {{ accountForm.password2 }}
+                        </div>
+                        <div class="input-field center">
+                            <label for="login-psw">Introduction2</label>
+                            <b>{{ accountForm.content.errors|striptags }}</b>
+                            {{ accountForm.content }}
                         </div>
                         <div class="input-field">
                             <label>User Image</label>

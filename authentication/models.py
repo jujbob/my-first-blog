@@ -1,5 +1,4 @@
-
-
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core import validators
 from django.core.files.base import ContentFile
@@ -64,7 +63,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     introduction = models.TextField(blank=True)
-    #image_file = models.ImageField(upload_to='image/original/%Y/%m/%d')
+    content = RichTextField(blank=True)
 
     objects = AccountManager()
 

@@ -14,7 +14,8 @@
  - (another way to install pillow) (if you have troubles) sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
  - pip install django-cleanup #for deleting images when imageFilds are updated
  - pip install --pre --upgrade sorl-thumbnail #for getting the latest version of sorl-thumbnail (and preventing errors about "no such table: thumbnail_kvstore")
-
+ - pip install django-ckeditor #for setting up WYSIWYG Editor CKEditor4.X
+ - python manage.py collectstatic
 
 
         '''
